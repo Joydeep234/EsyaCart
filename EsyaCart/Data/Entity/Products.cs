@@ -33,5 +33,7 @@ namespace EsyaCart.Data.Entity
         public DateTime createdAt { get; set; } = DateTime.UtcNow;
 
         public DateTime? updatedAt { get; set; }
+
+        public string? ImageUrl { get; set; }
     }
 }
