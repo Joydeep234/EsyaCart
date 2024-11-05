@@ -1,0 +1,47 @@
+# Build directories
+bin/
+obj/
+
+# User secrets - used by Secret Manager tool for sensitive info
+secrets.json
+
+# Configuration files for different environments
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+
+# Visual Studio related files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code files
+.vscode/
+
+# Rider/JetBrains project files
+.idea/
+
+# Node.js dependencies (if using npm or yarn for front-end)
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Log and debug files
+*.log
+*.dmp
+*.tlog
+
+
+# macOS and Windows generated files
+.DS_Store
+Thumbs.db
+
+# ASP.NET Razor temporary files
+Generated_Code/
+Razor/
+
+# Publish artifacts
+**/publish/
+**/published/
