@@ -1,0 +1,99 @@
+﻿@page
+@model EsyaCart.Pages.Vendor.VendorSignup
+@{
+    Layout = null;
+}
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta name="viewport" content="width=device-width" />
+     <title>@ViewBag.Title</title>
+     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
+ </head>
+ <body>
+
+@* <div class="container">
+    <form method="post">
+        <div>
+            
+        </div> 
+
+        <div>
+            
+        </div>
+
+        <div>
+            
+        </div>
+
+        <div>
+           
+        </div>
+
+        <button type="submit" class="form-control">Sign Up</button>
+    </form>
+
+</div>
+ *@
+    <!-- Registration 3 - Bootstrap Brain Component -->
+    <section class="m-0 p-0">
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-12 col-md-6 bsb-tpl-bg-lotion">
+                    <div class="p-3 p-md-4 p-xl-5">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-5">
+                                    <h2 class="h3">Registration</h2>
+                                    <h3 class="fs-6 fw-normal text-secondary m-0">Enter your details to register</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <form method="post">
+                            <div class="row gy-3 gy-md-4 overflow-hidden">
+                                <div class="col-12">
+                                    <label asp-for="vendorSignupModel.Email" class="form-label">Email</label>
+                                    <input type="email" placeholder="email" asp-for="vendorSignupModel.Email" class="form-control" />
+                                    <span asp-validation-for="vendorSignupModel.Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="vendorSignupModel.Contact_No" class="form-label">Contact Number</label>
+                                    <input type="text" placeholder="phone number" asp-for="vendorSignupModel.Contact_No" class="form-control" />
+                                    <span asp-validation-for="vendorSignupModel.Contact_No" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="vendorSignupModel.Password" class="form-label">Password</label>
+                                    <input type="password" placeholder="password" asp-for="vendorSignupModel.Password" class="form-control" />
+                                    <span asp-validation-for="vendorSignupModel.Password" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <label asp-for="vendorSignupModel.ConfirmPassword" class="form-label">Confirm Password</label>
+                                    <input type="password" placeholder="confirm-password" asp-for="vendorSignupModel.ConfirmPassword" class="form-control" />
+                                    <span asp-validation-for="vendorSignupModel.ConfirmPassword" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button class="btn bsb-btn-xl btn-primary" type="submit">Sign up</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+ </body>
+ </html>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+ 
+
