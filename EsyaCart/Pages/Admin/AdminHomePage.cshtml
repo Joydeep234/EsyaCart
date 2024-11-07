@@ -1,0 +1,52 @@
+﻿@page
+@model EsyaCart.Pages.Admin.AdminHomePageModel
+@{
+}
+
+<div class="d-flex justify-content-around flex-wrap">
+    <div class="card border border-light-subtle rounded-3 shadow-lg" style="width: 23rem;">
+        <div class="d-flex justify-content-around">
+            <div>
+                <p class="fs-1">@Model.UserCount</p>
+                <h5 >Registerd Users</h5>
+            </div>
+            <div >
+                <i class="fa-regular fa-user fs-1 m-3"></i>
+            </div>
+            
+        </div>
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+    <div class="card border border-light-subtle rounded-3 shadow-lg" style="width: 23rem;">
+        <div class="d-flex justify-content-around">
+            <div>
+                <p class="fs-1">@Model.VenderCount</p>
+                <h5>Registerd Vendors</h5>
+            </div>
+            <div>
+                <i class="fa-regular fa-file fs-1 m-3"></i>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+    <div class="card border border-light-subtle rounded-3 shadow-lg" style="width: 23rem;">
+        <div class="d-flex justify-content-around">
+            <div>
+                <p class="fs-1">@Model.VenderCount</p>
+                <h5>New Messages</h5>
+            </div>
+            <div>
+                <i class="fa-regular fa-message fs-1 m-3"></i>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+</div>
