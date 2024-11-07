@@ -1,0 +1,64 @@
+﻿@page
+@model EsyaCart.Pages.Admin.VendorListPageModel
+@{
+}
+
+<div class="col-12">
+    <table class="table table-striped">
+        <thead>
+        <th>Id</th>
+        <th>Vendor Name</th>
+        <th>Area</th>
+        <th>Pincode</th>
+        <th>Landmark</th>
+        <th>Vendor RegisterdAt</th>
+        <th>Vender Status</th>
+        <th>Approval</th>
+        
+        </thead>
+        <tbody>
+
+            @{
+                if (Model.AllVendorDetailsList.Count != 0)
+                {
+                    foreach (var userlist in Model.AllVendorDetailsList)
+                    {
+
+                        <tr>
+                            <td>@userlist.VendorID</td>
+                            <td>@userlist.VendorName</td>
+                            <td>@userlist.Area</td>
+                            <td>@userlist.Pincode</td>
+                            <td>@userlist.Landmark</td>
+                            <td>@userlist.CreatedAt</td>
+                            
+                            <td>@if(userlist.IsActive == true)
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">InActive</span>
+                                }
+                            </td>
+                            <td>
+                                @if (userlist.IsActive == true)
+                                {
+                                    <form method="post" asp-page-handler="Update" asp-route-VendorID="@userlist.VendorID" asp-route-status="false">
+                                        <button class="btn btn-outline-warning">Disable</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-page-handler="Update" asp-route-VendorID="@userlist.VendorID" asp-route-status="true">
+                                        <button class="btn btn-outline-success">Enable</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>

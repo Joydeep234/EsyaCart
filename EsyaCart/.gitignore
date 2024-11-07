@@ -19,7 +19,7 @@ appsettings.*.json
 
 # Visual Studio Code files
 .vscode/
-
+../.vs/
 # Rider/JetBrains project files
 .idea/
 
