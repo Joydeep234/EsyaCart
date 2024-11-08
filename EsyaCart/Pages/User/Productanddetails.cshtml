@@ -1,0 +1,62 @@
+@page
+@model EsyaCart.Pages.User.Productanddetails
+@using System.Globalization
+@{
+    ViewData["Title"] = "Productanddetails";
+}
+
+
+<div class="container">
+    <div class="container-main">
+        <div class="image-container">
+            <img src="~/Images/User/Logo.jpeg" alt="" class="img border border-2 p-4">
+        </div>
+        <form method="post" class="buybtn-container">
+            <button type="submit" asp-page-handler="AddCartAndBuy" asp-route-prodId="@Model.ProductInfo.Product_Id" class="form-control buybtn fs-3"><i class="fa-solid fa-bag-shopping fs-4" style="color: #ffffff;"></i> Buy</button>
+        </form>
+        @if(Model.cart2==null){
+            <form method="post" class="cartbtncontainer">
+                <button type="submit" asp-page-handler="AddToCart" asp-route-prodId="@Model.ProductInfo.Product_Id" class="form-control addcartbtn fs-3"><i class="fa-solid fa-cart-shopping fs-4" style="color: #ffffff;"></i> Add to cart </button>
+            </form>
+        }else{
+            <div class="d-flex justify-content-center align-items-center cartbtncontainer2">
+                <form method="post" class="ms-2">
+                    <button type="submit" asp-page-handler="DecreasefromCart" asp-route-prodId="@Model.ProductInfo.Product_Id" class="btn btn-danger fs-3 px-3">-</button>
+                </form>
+                <h2 class="text-center mx-3">@Model.cart2.Quantity.ToString()</h2>
+                <form method="post" class="me-2">
+                    <button type="submit" asp-page-handler="AddToCart" asp-route-prodId="@Model.ProductInfo.Product_Id" class="btn btn-primary fs-3">+</button>
+                </form>
+                
+            </div>
+        }
+        <div class="detailsContainer">
+                    <div class="">                
+                        <div class="">
+                            <h3>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Model.ProductInfo.ProductName.ToLower())</h3>
+                            <h4 class="ms-3">@Model.ProductInfo.Price</h4>
+                        </div>
+                        <p>@Model.ProductInfo.Description</p>  
+                    </div>
+
+                <div class=" border border-1 border-dark p-4">
+                    <h2 class="reviewstext">Reviews & Rating</h2>
+                    @if(Model.ProductReviewDetails.Count>0){
+                            @foreach(var review in Model.ProductReviewDetails){
+                        <div class="">
+                            <p>@review.UserName</p>
+                            <div class="text-white" style="background-color: rgb(17, 86, 17); width: max-content;">
+                                <p class="px-3">@review.Ratings  <i class="fa-solid fa-star" style="color: #ffffff;"></i></p>
+                            </div>
+                            <p class="fs-5 textcolor">@review.ReviewDescription</p>
+                            
+                        </div>
+                        }
+                    }else{
+                        <h3 class="textcolor">No Reviews</h3>
+                    }
+                </div>
+            
+        </div>
+    </div>
+</div>

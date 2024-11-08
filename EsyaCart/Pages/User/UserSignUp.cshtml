@@ -1,0 +1,46 @@
+@page
+@model EsyaCart.Pages.User.UserSignUp
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center bg-light">
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-md-6 col-lg-4">
+            <form method="post" class="form-control">
+                <div class="mb-3">
+                    <label asp-for="USInput.EmailID"></label>
+                    <input asp-for="USInput.EmailID" class="form-control" />
+                    <span asp-validation-for="USInput.EmailID" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="USInput.ContactNumber"></label>
+                    <input asp-for="USInput.ContactNumber" class="form-control" />
+                    <span asp-validation-for="USInput.ContactNumber" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="USInput.Password"></label>
+                    <input type="password" asp-for="USInput.Password" class="form-control" />
+                    <span asp-validation-for="USInput.Password" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="USInput.ConformPassword"></label>
+                    <input type="password" asp-for="USInput.ConformPassword" class="form-control" />
+                    <span asp-validation-for="USInput.ConformPassword" class="text-danger"></span>
+                </div>
+                <div class="">
+                     @if(TempData["error"]!=null){
+                        <span class="text-danger">@TempData["error"]</span>
+                        }
+                </div>
+                <div class="d-grid my-5">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+                <div class="text-center">
+                    <a asp-page="/user/UserLogin" class="btn btn-outline-primary">Already have an account? Log in</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
