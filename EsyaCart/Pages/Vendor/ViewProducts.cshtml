@@ -1,6 +1,64 @@
 ﻿@page
-@model EsyaCart.Pages.Vendor.ViewProductsModel
+@model EsyaCart.Pages.Vendor.ViewProducts
 @{
 }
+<div class="row g-2 mx-5 " >  
+@{
+    if (@Model.productList != null)
+    {
+        foreach (var product in @Model.productList)
+        {
+                <div class="col-12">
+                    <div class="card p-4 bg-light rounded-3 mb-3" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;">
+                        <div class="row align-items-center">
+                            <aside class="col-md-3">
+                                <a href="#">
+                                    <img src="~/Uploads/@product.ImageUrl" alt="product-image" style="height : 144px; width : 157px;" />
+                                </a>
+                            </aside> <!-- col.// -->
+                            <div class="col-md-6">
+                                <div class="info-main">
+                                    <h2 class="h5 title">@product.ProductName</h2>
+                                    <div class="d-flex my-3">
+                                        <i class="star fas fa-star text-warning mr-1"></i>
+                                        <i class="star fas fa-star text-warning mr-1"></i>
+                                        <i class="star fas fa-star text-warning mr-1"></i>
+                                        <i class="star fas fa-star text-warning mr-1"></i>
+                                        <i class="star fas fa-star text-warning"></i>
+                                        <span class="badge badge-pill badge-gray ml-2">4.7</span>
+                                        <span class="small text-success ml-3"><i class="fas fa-shopping-cart mr-1"></i>150 orders</span>
+                                    </div>
+                                    <p>@product.Description</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="h6 mb-0" style="font-size: 1.5rem; font-weight: 500;">₹ @product.Price</span>
+                                </div> <!-- info-price-detail // -->
+                                <span class="text-success small"><i class="fas fa-shipping-fast mx-2"></i>Free shipping</span>
+                                <div class="d-flex g-4 mt-4">
+                                    
+                                    <form class="mx-1" asp-asp-page-handler="Edit" asp-route-itemid="@product.Product_Id">
+                                        <a class="btn btn-warning btn-sm btn-block text-dark mx-1">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </a>
+                                    </form>
+                                    <form class="mx-1" asp-page-handler="Delete" asp-route-id="@product.Product_Id"> 
+                                        <button type="submit" class="btn btn-danger btn-sm btn-block text-light mx-1">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        }
+    }
+}   
+</div>
+
 
 

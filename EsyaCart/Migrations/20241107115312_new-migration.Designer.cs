@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EsyaCart.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241107053332_imgeupdate")]
-    partial class imgeupdate
+    [Migration("20241107115312_new-migration")]
+    partial class newmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

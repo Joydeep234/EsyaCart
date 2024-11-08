@@ -8,7 +8,7 @@ secrets.json
 # Configuration files for different environments
 appsettings.Development.json
 appsettings.Local.json
-appsettings.*.json
+appsettings.json
 
 # Visual Studio related files
 .vs/
