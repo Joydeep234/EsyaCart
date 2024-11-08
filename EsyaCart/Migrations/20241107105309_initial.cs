@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EsyaCart.Migrations
 {
     /// <inheritdoc />
-    public partial class secondDbConfig : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -105,7 +105,8 @@ namespace EsyaCart.Migrations
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     createdAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
