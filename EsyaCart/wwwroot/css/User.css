@@ -1,0 +1,105 @@
+.inputchange:focus{
+    border: none;
+    outline: none;
+}
+.hoverlink{
+    background-color: rgb(246, 246, 246);
+}
+.hoverlink:hover h3{
+    color: #157deb;
+}
+.othertags:hover{
+    color:black
+}
+body{
+    height: 100vh;
+    width: 100%;
+}
+.setheight{
+ height: 60vh;
+ width: 100%;
+}
+.container{
+    width: 100%;
+}
+.container-main{
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    grid-template-rows: repeat(10,1fr);
+    gap: 1rem;
+}
+.image-container{
+    grid-area: 1/1/6/6;
+    height: 100%;
+}
+.buybtn-container{
+    grid-area: 6/1/7/6;
+}
+.cartbtncontainer{
+    grid-area: 7/1/8/6;
+}
+.cartbtncontainer2{
+    grid-area: 7/1/8/6;
+}
+.detailsContainer {
+    padding: 2rem;
+    background-color: rgb(240, 240, 240);
+    grid-area: 1 / 6 / 11 / 11;
+    box-shadow: 0px 0px 7px #43434350;
+}
+.img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border: 2px solid;
+    padding: 4px;
+}
+/* .img:hover{
+    position: absolute;
+    width: 50%;
+    object-fit: contain;
+} */
+.buybtn,.addcartbtn{
+    background-color: rgb(64, 119, 238);
+    color: white;
+}
+.buybtn:hover,.addcartbtn:hover{
+    background-color: rgb(68, 86, 122);
+    color: rgb(255, 255, 255);
+    box-shadow:0px 0px 10px #000000bd;
+}
+.reviewstext{
+    color: rgb(38, 45, 64);
+    font-family:'Times New Roman', Times, serif;
+}
+.textcolor{
+    color: rgb(99, 100, 101);
+}
+.carttotal{
+    position: fixed;
+    bottom: 5%;
+    right:35%;
+}
+.btncolor {
+    background-color: #ff6f61;
+    color: white;
+    transition: background-color 0.1s ease-in-out, padding 0.2s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.btncolor:hover {
+    padding: 1rem;
+    background-color: #ff3624;
+    box-shadow: 0px 0px 7px rgba(71, 71, 71, 0.951);
+    color: rgb(99, 93, 93);
+}
+.classempty{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.classempty p{
+    font-size: 100px;
+    color: rgb(129, 129, 129);
+}
