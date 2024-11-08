@@ -1,0 +1,40 @@
+@page
+@model EsyaCart.Pages.User.ShowProducts
+@using System.Globalization
+@{
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="">
+    @if (Model.productsEntity.Count > 0)
+    {
+        @foreach (var product in Model.productsEntity)
+        {
+            <div class="row p-4 border hoverlink" >
+                <a asp-page="Productanddetails" asp-route-productID="@product.Product_Id" class="row text-dark text-decoration-none">
+                    <div class="col-3">
+                    <img src="~/Images/User/Logo.jpeg" alt="" width="250px" height="150px">
+                    </div>
+                    <div class="col-5">
+                        <div class="hoverlink">
+                            <h3>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</h3>
+                        </div>
+                        <div class="othertags">
+                            <p>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.Description.ToLower())</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="othertags">
+                            <p class="fs-4 fw-bold">@product.Price</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    }
+    else
+    {
+        <h1>Products Not Available</h1>
+    }
+</div>
