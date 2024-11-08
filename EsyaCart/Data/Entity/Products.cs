@@ -38,4 +38,4 @@ namespace EsyaCart.Data.Entity
         public string? ImageUrl { get; set; }
 
     }
-}
+} 
