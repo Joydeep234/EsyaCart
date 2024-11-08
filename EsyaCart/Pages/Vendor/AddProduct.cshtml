@@ -1,0 +1,50 @@
+﻿@page
+@model EsyaCart.Pages.Vendor.AddProduct
+@{
+}
+<h1>Add Product Page</h1>
+<section>
+    <form method="post" enctype="multipart/form-data">
+
+        <div>
+            <label asp-for="addProductModel.ProductName" class="form-label">Product Name</label>
+            <input type="text" asp-for="addProductModel.ProductName" class="form-control mt-3" />
+            <span asp-validation-for="addProductModel.ProductName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="addProductModel.Price" class="form-label">Price</label>
+            <input type="number" asp-for="addProductModel.Price" class="form-control mt-3" />
+            <span asp-validation-for="addProductModel.ProductName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="addProductModel.Quantity" class="form-label">Quantity</label>
+            <input type="text" asp-for="addProductModel.Quantity" class="form-control mt-3" />
+            <span asp-validation-for="addProductModel.Quantity" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="addProductModel.Descirption" class="form-label">Description</label>
+            <input type="text" asp-for="addProductModel.Descirption" class="form-control mt-3" />
+            <span asp-validation-for="addProductModel.Descirption" class="text-danger"></span>
+        </div>
+
+        <div class="form form-group">
+            <label asp-for="addProductModel.Category_Id" class="form-label">Category</label>
+            <select asp-for="addProductModel.Category_Id" class="form-control">
+                <option value="">Select a category</option>
+                @foreach (var category in (List<SelectListItem>)ViewData["CategoryList"])
+                {
+                    <option value="@category.Value">@category.Text</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <label asp-for="addProductModel.ImageUrl" class="form-label">Upload Image</label>
+            <input asp-for="addProductModel.ImageUrl" class="form-control" />
+        </div>
+        <button type="submit">Add Product</button>
+	</form>
+</section>

@@ -1,0 +1,43 @@
+﻿@page
+@model EsyaCart.Pages.Admin.ProductsListModel
+@{
+}
+
+<div class="col-12">
+    <table class="table table-striped">
+        <thead>
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <th>Vender Id</th>
+        <th>Prise</th>
+        <th>Quantity</th>
+        <th>CreatedAt</th>
+        <th>UpdatedAt</th>
+        <th>Image</th>
+        <th>Status</th>
+        </thead>
+        <tbody>
+
+            @{
+                if (Model.productsList.Count != 0)
+                {
+                    foreach (var userlist in Model.productsList)
+                    {
+
+                        <tr>
+                            <td>@userlist.Product_Id</td>
+                            <td>@userlist.ProductName</td>
+                            <td>@userlist.Vendor_Id</td>
+                            <td>@userlist.Price</td>
+                            <td>@userlist.Quantity</td>
+                            <td>@userlist.createdAt</td>
+                            <td>@userlist.updatedAt</td>
+                            <td>@userlist.ImageUrl</td>
+                            <td>@userlist.IsActive</td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>

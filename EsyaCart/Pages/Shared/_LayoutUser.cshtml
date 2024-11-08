@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EsyaCart</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/user.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container row">
+                
+                <div class="col-2">
+                    <a class="navbar-brand" asp-area="" asp-page="/User/Dashboard"><img src="~/Images/User/Logo.jpeg" alt="" srcset="" width="100px" height="60px" class="rounded rounded-2"> </a>
+                </div>
+                <div class="col-7">
+                    <div class="row" style="background-color:#F0F5FF;">
+                        <div class=" col-1 p-2 text-center">
+                            <i class="fa-solid fa-magnifying-glass fs-3"></i>
+                        </div>
+                        <div class="containerinput col">                        
+                            <input type="text" class="w-100 col p-1 inputchange border-0 p-2" style="background-color:#F0F5FF;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 text-center">
+                    <div class="d-flex">
+                        <div>
+                            <a asp-page="../User/UserProfile" class="mx-3 text-decoration-none text-dark">
+                            <i class="fa-regular fa-user border rounded-circle p-2 border-dark logintext"></i>
+                            </a>
+                        </div>
+                        <div class="logintext">
+                            <a asp-page="../User/UserLogin" class="d-flex text-decoration-none text-dark fs-5">
+                            <p class="">Login</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 text-center ms-5 carttext">
+                    <a asp-page="../User/UserCart" class="d-flex align-items-center text-decoration-none text-dark">
+                        <div class="me-3">
+                            <i class="fa-solid fa-cart-shopping fs-4"></i>
+                        </div>
+                        <div class="fs-5">
+                            <p>Cart</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-2 text-center sellertext ">
+                    <a asp-page="" class="d-flex align-items-center text-decoration-none text-dark">
+                        <div class="me-3 ">
+                            <i class="fa-solid fa-shop fs-4"></i>
+                        </div>
+                        <div class="fs-5">
+                            <p>Become a Seller</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="https://kit.fontawesome.com/6978f47505.js" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

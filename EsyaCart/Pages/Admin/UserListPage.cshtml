@@ -1,0 +1,49 @@
+﻿@page
+@model EsyaCart.Pages.Admin.UserListPageModel
+@{
+}
+
+<div class="col-12">
+    <table class="table table-striped">
+        <thead>
+        <th>Id</th>
+        <th>User Name</th>
+        <th>Area</th>
+        <th>Pincode</th>
+        <th>Landmark</th>
+        <th>User RegisterdAt</th>
+        <th>User Status</th>
+        </thead>
+        <tbody>
+
+            @{
+                if (Model.AllUserDetailsList.Count != 0)
+                {
+                    foreach (var userlist in Model.AllUserDetailsList)
+                    {
+
+                        <tr>
+                            <td>@userlist.UserDetails_Id</td>
+                            <td>@userlist.UserName</td>
+                            <td>@userlist.Area</td>
+                            <td>@userlist.Pincode</td>
+                            <td>@userlist.Landmark</td>
+                            <td>@userlist.CreatedAt</td>
+                            <td>@{
+                                    if(userlist.IsActive == true)
+                                    {
+                                        <span class="badge bg-success">Active</span>
+                                    }
+                                    else
+                                    {
+                                      <span class="badge bg-danger">InActive</span>  
+                                    }
+                                    }
+                                    </td>
+                                    </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>

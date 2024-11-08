@@ -1,0 +1,30 @@
+﻿@page
+@model EsyaCart.Pages.Vendor.VendorHome
+@{
+}
+
+<h1>Please add additional details</h1>
+<form method="post" >
+	<div>
+		<label asp-for="vendorDetailsModel.VendorName" class="form-label">Vendor Name</label>
+		<input asp-for="vendorDetailsModel.VendorName" class="form-control" />
+	</div>
+	<div>
+		<label asp-for="vendorDetailsModel.VendorName" class="form-label">Area</label>
+		<input asp-for="vendorDetailsModel.Area" class="form-control" />
+	</div>
+
+	<div>
+		<label asp-for="vendorDetailsModel.Landmark" class="form-label">Landmark</label>
+		<input asp-for="vendorDetailsModel.Landmark" class="form-control" />
+	</div>
+
+	<div>
+		<label accesskey="vendorDetailsModel.Pincode" class="form-label">Pincode</label>
+		<input asp-for="vendorDetailsModel.Pincode" class="form-control"/>
+	</div>
+
+	<div>
+		<button type="submit">Submit</button>
+	</div>
+</form>

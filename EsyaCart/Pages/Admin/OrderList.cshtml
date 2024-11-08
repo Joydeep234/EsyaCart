@@ -1,0 +1,41 @@
+﻿@page
+@model EsyaCart.Pages.Admin.OrderListModel
+@{
+}
+
+<div class="col-12">
+    <table class="table table-striped">
+        <thead>
+        <th>Order Id</th>
+        <th>Customer's Id</th>
+        <th>Product Id</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Total Price</th>
+        <th>Quantity</th>
+        <th>Order Status</th>
+        </thead>
+        <tbody>
+
+            @{
+                if (Model.AllOrders.Count != 0)
+                {
+                    foreach (var userlist in Model.AllOrders)
+                    {
+
+                        <tr>
+                            <td>@userlist.OrderItems_Id</td>
+                            <td>@userlist.Customer_Id</td>
+                            <td>@userlist.Product_Id</td>
+                            <td>@userlist.OrderedDate</td>
+                            <td>@userlist.Price</td>
+                            <td>@userlist.TotalPrice</td>
+                            <td>@userlist.Quantity</td>
+                            <td>@userlist.isDelivered</td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
