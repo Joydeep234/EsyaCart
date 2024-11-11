@@ -18,6 +18,8 @@ namespace EsyaCart.Pages.Admin
 
         public int UserCount { get; set; }
         public int VenderCount { get; set; }
+
+        public int OrderCount { get; set; }
         public List<string> Days { get; set; } = new List<string>();
         public List<double> TotalSales { get; set; } = new List<double>();
         public List<int> GroupedOrderCount { get; set; } = new List<int>();
@@ -26,6 +28,7 @@ namespace EsyaCart.Pages.Admin
         {
             UserCount = await _context.UserDetails.CountAsync();
             VenderCount = await _context.VendorDetails.CountAsync();
+            OrderCount = await _context.Orders.CountAsync();
 
             var salesData = await _context.Orders
                 .Where(o => o.OrderedDate >= DateTime.Now.AddDays(-7))
