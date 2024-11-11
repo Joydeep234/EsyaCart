@@ -2,62 +2,102 @@
 @model EsyaCart.Pages.Vendor.ViewProducts
 @{
 }
-<div class="row g-2 mx-5 " >  
-@{
-    if (@Model.productList != null)
+
+<div class="border border-light rounded-2 py-2 mx-4 d-flex g-5">
+    @foreach (var category in Model.categoryList)
     {
-        foreach (var product in @Model.productList)
+        <form asp-page-handler="Category" asp-route-categoryId="@category.Catagory_Id">
+            <button class="btn btn-outline-dark mx-3" type="submit">@category.CatagoryName</button>
+        </form>
+    }  
+</div>
+
+<div class="row g-2 mx-5">  
+@{
+    if (@Model.productReviews.Count != 0)
+    {
+            foreach (var product in Model.productReviews)
         {
                 <div class="col-12">
                     <div class="card p-4 bg-light rounded-3 mb-3" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;">
                         <div class="row align-items-center">
-                            <aside class="col-md-3">
+                            <aside class="col-md-2">
                                 <a href="#">
                                     <img src="~/Uploads/@product.ImageUrl" alt="product-image" style="height : 144px; width : 157px;" />
                                 </a>
-                            </aside> <!-- col.// -->
+                            </aside>
                             <div class="col-md-6">
                                 <div class="info-main">
                                     <h2 class="h5 title">@product.ProductName</h2>
                                     <div class="d-flex my-3">
+                                        @{
+                                            int num = Convert.ToInt32(product.Ratings);
+                                            for(int i = 0;i<num; i++){
                                         <i class="star fas fa-star text-warning mr-1"></i>
-                                        <i class="star fas fa-star text-warning mr-1"></i>
-                                        <i class="star fas fa-star text-warning mr-1"></i>
-                                        <i class="star fas fa-star text-warning mr-1"></i>
-                                        <i class="star fas fa-star text-warning"></i>
-                                        <span class="badge badge-pill badge-gray ml-2">4.7</span>
-                                        <span class="small text-success ml-3"><i class="fas fa-shopping-cart mr-1"></i>150 orders</span>
+                                        }
+                                    }
+                                        
+                                      
+                                        <span class="badge text-dark ml-2">@num</span>
+                      
                                     </div>
                                     <p>@product.Description</p>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-3">
+                            <div class="col-md-3">
                                 <div class="d-flex align-items-center mb-2">
                                     <span class="h6 mb-0" style="font-size: 1.5rem; font-weight: 500;">₹ @product.Price</span>
-                                </div> <!-- info-price-detail // -->
+                                </div> 
                                 <span class="text-success small"><i class="fas fa-shipping-fast mx-2"></i>Free shipping</span>
                                 <div class="d-flex g-4 mt-4">
+                                @{
                                     
-                                    <form class="mx-1" asp-asp-page-handler="Edit" asp-route-itemid="@product.Product_Id">
-                                        <a class="btn btn-warning btn-sm btn-block text-dark mx-1">
-                                            <i class="fas fa-edit"></i>
-                                            Edit
-                                        </a>
-                                    </form>
-                                    <form class="mx-1" asp-page-handler="Delete" asp-route-id="@product.Product_Id"> 
-                                        <button type="submit" class="btn btn-danger btn-sm btn-block text-light mx-1">
-                                            <i class="fa-solid fa-trash-can"></i>
-                                            Delete
-                                        </button>
-                                    </form>
+                                    if(product.IsActive == true)
+                                    {
+                                            <form method="post" class="mx-1">
+                                                <a asp-page="/Vendor/EditProduct" asp-route-productId="@product.Product_Id" class="btn btn-warning btn-sm btn-block text-dark mx-1">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </a>
+                                            </form>
+                                    }
+                                    else
+                                    {
+                                            <form method="post" class="mx-1" asp-route-productId="@product.Product_Id" asp-page-handler="Enable">
+                                                <button type="submit" class="btn btn-danger btn-sm btn-block text-light mx-1">
+                                                    <i class="fa-regular fa-square-check"></i>
+                                                    Enable
+                                                </button>
+                                            </form>
+                                    }
+                                    }
                                 </div>
+                            </div>
+                            <div class="col d-flex flex-column">
+                                <p class="text-lg-center">Quantity</p>
+                                <h3 class="fw-bolder text-xxl-center">@product.Quantity</h3>
+                                @{
+                                    if(product.Quantity < 10)
+                                    {
+                                        <span class="text-danger">Only few items left</span>
+                                    }
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
+            }
         }
-    }
-}   
+        else
+        {
+            <div class="mt-5 d-flex align-items-center justify-content-center">
+                <div>
+                    <img src="~/Images/Seller/not-found.jpg" style="height: 450px; width: 400px;">
+                    <h3>Ooops..! No Products Found</h3>
+                </div>
+            </div>
+        }
+    }   
 </div>
 
 

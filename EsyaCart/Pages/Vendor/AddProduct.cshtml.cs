@@ -64,7 +64,7 @@ namespace EsyaCart.Pages.Vendor
                     Price = addProductModel.Price,
                     Quantity = addProductModel.Quantity,
                     Description = addProductModel.Descirption,
-                    IsActive = true,
+                    IsActive = false,
                     ImageUrl = fileName
                 };
 
@@ -72,6 +72,8 @@ namespace EsyaCart.Pages.Vendor
                 await _context.SaveChangesAsync();
 
                 Console.WriteLine("product added successfully");
+
+                return RedirectToPage("/Vendor/ViewProducts");
                 
             }
             return Page();

@@ -1,0 +1,36 @@
+﻿@page
+@model EsyaCart.Pages.Vendor.EditProduct
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form method="post">
+         
+                <div class="mt-2">
+                    <label asp-for="editProducts.ProductName">Product Name</label>
+                    <input asp-for="editProducts.ProductName" class="form-control"/>
+                    <span asp-validation-for="editProducts.ProductName"></span>
+                </div>
+                <div class="mt-2">
+                    <label asp-for="editProducts.Price">Price</label>
+                    <input asp-for="editProducts.Price" type="text" />
+                    <span asp-validation-for="editProducts.Price"></span>
+                </div>
+                <div class="mt-2">
+                    <label asp-for="editProducts.Quantity">Quantity</label>
+                    <input asp-for="editProducts.Quantity" type="number" />
+                    <span asp-validation-for="editProducts.Quantity"></span>
+                </div>
+                <div class="mt-2">
+                    <label asp-for="editProducts.Description">Description</label>
+                    <input asp-for="editProducts.Description" type="text" />
+                    <span asp-validation-for="editProducts.Description"></span>
+                </div>
+             
+                <button type="submit" class="btn btn-light mt-2">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
