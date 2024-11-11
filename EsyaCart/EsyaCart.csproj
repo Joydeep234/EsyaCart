@@ -16,12 +16,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="toastr" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\Images\Seller\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
-
+	
 </Project>

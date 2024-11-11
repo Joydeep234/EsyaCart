@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/AdminHomePageStyleSheet.css" asp-append-version="true"   />
 </head>
 <body>
-    <div class="container-fluid position-fixed">
+    <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
+            <div class="col-2 col-md-2 col-xl-2 px-sm-2 px-0 bg-light position-fixed">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <div class="mx-2">
                         <img src="~/Images/Admin/logo4.png" alt="Alternate Text" height="80" width="120" />
@@ -60,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col py-3">
+            <div class="col-10 position-absolute py-3 overflow-hidden" style="left: 260px" >
                 @RenderBody()
             </div>
         </div>
@@ -70,6 +71,8 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 @await RenderSectionAsync("Scripts", required: false)
 
