@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EsyaCart</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/user.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Updated Sidebar and Content Layout -->
+<div class="d-flex my-2" style="height: 102vh;">
+    <!-- Left Sidebar (Fixed) -->
+    <aside class="col-2 position-fixed" style="top: 0; left: 0; height: 100vh; background-color: #f8f9fa;">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <ul class="sidebarli list-unstyled p-0">
+                <li class="setting-a">
+                    <a asp-page="../UserProfile/UsersProfile" class="btn text-decoration-none text-dark fs-5">
+                        <i class="fa-solid fa-user me-2" style="color: #000000;"></i>Profile
+                    </a>
+                </li>
+                <li class="setting-a">
+                    <a asp-page="../Dashboard" class="btn text-decoration-none text-dark fs-5">
+                        <i class="fa-solid fa-house me-2" style="color: #000000;"></i>Home
+                    </a>
+                </li>
+                <li class="setting-a">
+                    <a asp-page="../UserProfile/UserOrderShow" class="btn text-decoration-none text-dark fs-5">
+                        My Orders
+                    </a>
+                </li>
+            </ul>            
+        </div>
+    </aside>
+
+    <!-- Main Content Area (Right) -->
+    <div class="col-9 offset-3">
+        <main role="main" class="pb-3 flex-fill">
+            @RenderBody()
+        </main>
+    </div>
+</div>
+
+
+    <script src="https://kit.fontawesome.com/6978f47505.js" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/User.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

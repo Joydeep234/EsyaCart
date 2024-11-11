@@ -1,0 +1,29 @@
+@page
+@model EsyaCart.Pages.User.UserOrders
+@{
+    Layout = null;
+}
+
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/user.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true"/>
+
+@if(TempData["Data"]!=null)
+{
+    <div class="containermainupper">
+        <div class="containermain">
+            <div class="payment">
+                <p class="fs-1 text-center" style="color:rgba(89, 188, 89, 0.763);">Payment Successfull</p>
+                <p class="fs-1 text-center border-circle">✓ </p>
+            </div>
+            <div class="paydetails">
+                <b><p class="fs-5">ThankYou! Your Payment of Rs @TempData["Data"] has been recieved</p></b>
+            </div>
+            <div class="btns btn">
+                <a asp-page="../User/Dashboard" class="text-decoration-none fs-4 text-white">Ok</a>
+            </div>
+        </div>
+    </div>
+}

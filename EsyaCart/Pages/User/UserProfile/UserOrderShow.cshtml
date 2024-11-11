@@ -1,0 +1,81 @@
+@page
+@model EsyaCart.Pages.User.UserProfile.UserOrderShow
+@{
+    ViewData["Title"] = "UserOrderShow";
+}
+
+
+<div class="container">
+    <h2 class="text-center mt-3" style="color: rgb(129, 129, 129);">All Orders</h2>
+    @if(Model.orderdet.Count>0){
+        foreach(var ord in Model.orderdet)
+        {
+                    
+            <div class="row settingborder mt-5">
+                <a asp-page="../../User/Productanddetails" asp-route-productID = "@ord.Product_id" class="col d-flex align-items-center justify-content-center setimginorder">
+                    <img src="~/Images/User/Logo.jpeg" alt="Product Image" class="orderimg">
+                </a>
+                <div class="col">
+                    <div class=" d-flex flex-column">
+                        <a asp-page="../../User/Productanddetails" asp-route-productID = "@ord.Product_id" class="fs-4 text-decoration-none text-dark">@ord.ProdName</a>
+                        <div class="">
+                            <span class="fs-6">Order Date : </span><span class="fs-6 text-success">@ord.orderdate</span>
+                        </div>
+                        <div class="">
+                            <span class="fs-6">Total quantity : </span><span class="fs-6 text-success">@ord.ProdQuantity</span>
+                        </div>
+                        @if(ord.DeliveryStatus==true){
+                            <p class="fs-5 mt-2 text-success">Delivered</p>
+                        }else{
+                            <p class="fs-5 mt-2 text-warning">Not Delivered</p>
+                        }
+                        
+                    </div>
+                </div>
+                <div class="col">
+                <div class="d-flex flex-column align-items-center">
+                        <div class="">
+                            <span class=" fs-4 mx-2">₹ </span><span class=" fs-4 text-success">@ord.TotPrice</span>
+                        </div>
+                        <div>
+                            <button  class="btn btn-secondary mt-3 ms-5" data-bs-toggle="modal" data-bs-target="#cartModal">Add Reviews</button>
+                        </div>
+                        @if(ord.DeliveryStatus==true){
+                            <button class="btn btn-danger mt-4 ms-5">Cancel order</button>
+                        }
+                        
+                </div>
+                </div>
+            </div>
+            <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Add Product review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <div class="d-flex align-items-center justify-content-center setimginorder">
+                    <img src="~/Images/User/Logo.jpeg" alt="Product Image" class="orderimg">
+                </div>
+                <div class="">
+                    <form method="post">
+                        <textarea asp-for="@Model.reviewmodel.Description" class="form-control ms-3" style="resize: none;" cols="30" rows="3" placeholder="Write Review..."></textarea>
+                        <input type="number" asp-for="@Model.reviewmodel.Ratings" class="form-control ms-3 mt-2" placeholder="Rating..">
+                        <span asp-validation-for="@Model.reviewmodel.Ratings"></span>
+                        
+                        
+                        <button type="submit" asp-page-handler="EditReviews" asp-route-prodid="@ord.Product_id" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Submit Review</button>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+        }
+    }else{
+        
+    }
+</div>
+
