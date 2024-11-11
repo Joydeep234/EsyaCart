@@ -1,52 +1,140 @@
 ﻿@page
 @model EsyaCart.Pages.Admin.AdminHomePageModel
+@using Newtonsoft.Json
 @{
 }
 
 <div class="d-flex justify-content-around flex-wrap">
-    <div class="card border border-light-subtle rounded-3 shadow-lg" style="width: 23rem;">
+    <div class="card border border-light-subtle rounded-3 shadow-lg mt-5 py-4" style="width: 25rem;">
         <div class="d-flex justify-content-around">
             <div>
-                <p class="fs-1">@Model.UserCount</p>
-                <h5 >Registerd Users</h5>
+                <p class="number">@Model.UserCount</p>
+                <h5 class="heading">Registered Users</h5>
             </div>
-            <div >
-                <i class="fa-regular fa-user fs-1 m-3"></i>
+            <div>
+                <i class="icon fa-regular fa-user m-3"></i>
             </div>
-            
         </div>
         <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class=" message card-text">Here is the total count of active users currently engaging with your system.</p>
         </div>
     </div>
-    <div class="card border border-light-subtle rounded-3 shadow-lg" style="width: 23rem;">
+
+    <div class="card border border-light-subtle rounded-3 shadow-lg mt-5 py-4" style="width: 25rem;">
         <div class="d-flex justify-content-around">
             <div>
-                <p class="fs-1">@Model.VenderCount</p>
-                <h5>Registerd Vendors</h5>
+                <p class="number">@Model.VenderCount</p>
+                <h5 class ="heading">Registered Vendors</h5>
             </div>
             <div>
-                <i class="fa-regular fa-file fs-1 m-3"></i>
+                <i class="icon fa-regular fa-file  m-3"></i>
             </div>
-
         </div>
         <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class=" message card-text">
+                Here is the total count of vendors actively registered in your system.
+               
+            </p>
         </div>
     </div>
-    <div class="card border border-light-subtle rounded-3 shadow-lg" style="width: 23rem;">
+
+    <div class="card border border-light-subtle rounded-3 shadow-lg mt-5 py-4"  style="width: 25rem;">
         <div class="d-flex justify-content-around">
             <div>
-                <p class="fs-1">@Model.VenderCount</p>
-                <h5>New Messages</h5>
+                <p class="number">@Model.VenderCount</p>
+                <h5 class="heading">New Messages</h5>
             </div>
             <div>
-                <i class="fa-regular fa-message fs-1 m-3"></i>
+                <i class="icon fa-regular fa-message m-3"></i>
             </div>
-
         </div>
         <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="message card-text"> This block shows the number of new messages awaiting your attention.</p>
         </div>
     </div>
 </div>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Sales and Order Count Chart</title>
+    @* <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Restrict styling to only the chart container */
+        .chart-container {
+            width: 70%;
+            margin: auto;
+            margin-top: 6%;
+            background-color: #fff; /* Ensures consistent background */
+        }
+
+        canvas#myChart {
+            height: 300px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        /* Ensuring no overflow in main chart area */
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <h2>Weekly Sales and Order Count Chart</h2>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        const days = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Days));
+        const totalSales = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.TotalSales));
+        const orderCounts = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.GroupedOrderCount));
+
+        const ctx = document.getElementById("myChart").getContext("2d");
+        const myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: days,
+                datasets: [
+                    {
+                        label: "Total Sales",
+                        data: totalSales,
+                        backgroundColor: "rgba(153,205,1,0.6)",
+                        borderColor: "rgba(153,205,1,1)",
+                        borderWidth: 2,
+                        fill: false
+                    },
+                    {
+                        label: "Order Count",
+                        data: orderCounts,
+                        backgroundColor: "rgba(255,99,132,0.6)",
+                        borderColor: "rgba(255,99,132,1)",
+                        borderWidth: 2,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
