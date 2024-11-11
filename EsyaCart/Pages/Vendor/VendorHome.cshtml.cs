@@ -8,8 +8,10 @@ namespace EsyaCart.Pages.Vendor
 {
 	public class VendorHome : PageModel
     {
+		public bool approval;
 
-        private readonly AppDbContext _context;
+
+		private readonly AppDbContext _context;
 
         public VendorHome(AppDbContext context)
         {
@@ -20,28 +22,34 @@ namespace EsyaCart.Pages.Vendor
         public VendorDetailsModel vendorDetailsModel { get; set; }
         public void OnGet()
         {
+			var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == 4).FirstOrDefault();
+			approval = vendorData.IsApproved;
+			
 
-        }
+		}
 
         public async Task<IActionResult> OnPostAsync() {
 
-            if(ModelState.IsValid)
-            {
-                VendorDetails vendorDetails = new VendorDetails
-                {
-                    VendorName = vendorDetailsModel.VendorName,
-                    Area = vendorDetailsModel.Area,
-                    Landmark = vendorDetailsModel.Landmark,
-                    Pincode = vendorDetailsModel.Pincode,
-                    Accounts_Id = 4
-                };
+			var UpdatedData = _context.VendorDetails.Where(p => p.Accounts_Id == 4).FirstOrDefault();
+			// 9 = Session Id
+			if (UpdatedData != null)
+			{
+				UpdatedData.VendorName = vendorDetailsModel.VendorName;
+				UpdatedData.Area= vendorDetailsModel.Area;
+				UpdatedData.Landmark = vendorDetailsModel.Landmark;
+				UpdatedData.Pincode = vendorDetailsModel.Pincode;
+				UpdatedData.IsApproved = vendorDetailsModel.isApproved;
 
-                await _context.AddAsync(vendorDetails);
-                await _context.SaveChangesAsync();
+				_context.SaveChanges();
 
-            }
+				TempData["Success"] = "Details Updated Successfully";
 
-            return Page();
-        }
+				return RedirectToPage();
+			}
+			else
+			{
+				return Page();
+			}
+		}
     }
 }

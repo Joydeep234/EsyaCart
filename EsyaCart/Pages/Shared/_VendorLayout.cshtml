@@ -8,48 +8,52 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Vendor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true"/>
+
+
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="col-2 col-md-3 bg-light col-xl-2 px-sm-2 px-0 position-fixed">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline">Menu</span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
-                            <a asp-page="/Vendor/VendorHome" class="nav-link align-middle px-0">
-                               <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a>
+                            <div>
+                                <a asp-page="/Vendor/VendorHome" class="nav-link align-middle px-0">
+                                    <span class="ms-1 d-none d-sm-inline">Home</span>
+                                </a>
+                            </div>
                         </li>
                         <li>
-                            <a asp-page="/Vendor/AddProduct" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                               <span class="ms-1 d-none d-sm-inline">Add Products</span>
-                            </a>
+                            <div>
+                                <a asp-page="/Vendor/AddProduct" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                    <span class="ms-1 d-none d-sm-inline">Add Products</span>
+                                </a>
+                            </div>
                         </li>
                         <li>
-                            <a asp-page ="/Vendor/ViewProducts" class="nav-link px-0 align-middle">
-                                <span class="ms-1 d-none d-sm-inline">View Products</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
-                            </a>
+                            <div>
+                                <a asp-page="/Vendor/ViewProducts" class="nav-link px-0 align-middle">
+                                    <span class="ms-1 d-none d-sm-inline">View Products</span>
+                                </a>
+                            </div>  
                         </li>
                     </ul>
-                    <hr>
-                    
+                    <hr>  
                 </div>
             </div>
-            <div class="col py-3">
-                
+            <div class="col-10 py-3 position-relative overflow-hidden overflow-hidden" style="left: 260px">
+                <partial name="_Notification" />
                 @RenderBody()
             </div>
         </div>
-    </div>
-    @* @RenderSection("Scripts", required: false) *@
+	</div>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="container-main">
         <div class="image-container">
-            <img src="~/Images/User/Logo.jpeg" alt="" class="img border border-2 p-4">
+            <img src="~/Uploads/@Model.ProductInfo.ImageUrl" alt="" class="img border border-2 p-4">
         </div>
         <form method="post" class="buybtn-container">
             <button type="submit" asp-page-handler="AddCartAndBuy" asp-route-prodId="@Model.ProductInfo.Product_Id" class="form-control buybtn fs-3"><i class="fa-solid fa-bag-shopping fs-4" style="color: #ffffff;"></i> Buy</button>

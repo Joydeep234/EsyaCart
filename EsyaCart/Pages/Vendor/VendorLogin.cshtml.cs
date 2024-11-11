@@ -32,6 +32,9 @@ namespace EsyaCart.Pages.Vendor
 
                 if (validUser != null)
                 {
+
+                    TempData["Success"] = "User " + validUser.Email + " Logedin SUccessfull";
+                    Console.WriteLine(TempData["Success"]);
                     return RedirectToPage("/Vendor/VendorHome");
                 }
                 else

@@ -8,10 +8,15 @@ secrets.json
 # Configuration files for different environments
 appsettings.Development.json
 appsettings.Local.json
+<<<<<<< HEAD
+appsettings.json
+
+=======
 appsettings.*.json
 appsettings.json
 wwwroot/Uploads/
 Migrations/
+>>>>>>> b3fdede618ac667901eaaa838c05ae19a42ead75
 # Visual Studio related files
 .vs/
 *.suo

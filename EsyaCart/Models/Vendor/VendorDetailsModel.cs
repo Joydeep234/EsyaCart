@@ -16,5 +16,7 @@ namespace EsyaCart.Models.Vendor
         [Required(ErrorMessage = "Pincode is required")]
         public int Pincode { get; set; }
 
-    }
+		public bool isApproved { get; set; }
+
+	}
 }

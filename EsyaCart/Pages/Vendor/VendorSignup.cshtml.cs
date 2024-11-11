@@ -49,6 +49,21 @@ namespace EsyaCart.Pages.Vendor
 
                     await _context.Account.AddAsync(vendorData);
                     await _context.SaveChangesAsync();
+
+                    VendorDetails vendorDetails = new VendorDetails
+                    {
+                        VendorName = "Nill",
+                        IsApproved = false,
+                        Area = "Nill",
+                        Landmark = "Nill",
+                        Pincode = 000000,
+                        Accounts_Id = vendorData.Account_Id
+
+					};
+
+                    await _context.VendorDetails.AddAsync(vendorDetails);
+                    await _context.SaveChangesAsync();
+
                     return RedirectToPage("/Vendor/VendorLogin");
                 }
             }

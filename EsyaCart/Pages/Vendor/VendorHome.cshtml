@@ -1,30 +1,49 @@
 ﻿@page
+
 @model EsyaCart.Pages.Vendor.VendorHome
 @{
+
 }
+@{
+	if (Model.approval)
+    {
+		<h1>Please add additional details</h1>
+		<form method="post">
+			<div>
+				<label asp-for="vendorDetailsModel.VendorName" class="form-label">Vendor Name</label>
+				<input asp-for="vendorDetailsModel.VendorName" class="form-control" />
+			</div>
+			<div>
+				<label asp-for="vendorDetailsModel.VendorName" class="form-label">Area</label>
+				<input asp-for="vendorDetailsModel.Area" class="form-control" />
+			</div>
 
-<h1>Please add additional details</h1>
-<form method="post" >
-	<div>
-		<label asp-for="vendorDetailsModel.VendorName" class="form-label">Vendor Name</label>
-		<input asp-for="vendorDetailsModel.VendorName" class="form-control" />
-	</div>
-	<div>
-		<label asp-for="vendorDetailsModel.VendorName" class="form-label">Area</label>
-		<input asp-for="vendorDetailsModel.Area" class="form-control" />
-	</div>
+			<div>
+				<label asp-for="vendorDetailsModel.Landmark" class="form-label">Landmark</label>
+				<input asp-for="vendorDetailsModel.Landmark" class="form-control" />
+			</div>
 
-	<div>
-		<label asp-for="vendorDetailsModel.Landmark" class="form-label">Landmark</label>
-		<input asp-for="vendorDetailsModel.Landmark" class="form-control" />
-	</div>
+			<div>
+				<label accesskey="vendorDetailsModel.Pincode" class="form-label">Pincode</label>
+				<input asp-for="vendorDetailsModel.Pincode" class="form-control" />
+			</div>
 
-	<div>
-		<label accesskey="vendorDetailsModel.Pincode" class="form-label">Pincode</label>
-		<input asp-for="vendorDetailsModel.Pincode" class="form-control"/>
-	</div>
+			<div>
+				<button type="submit">Submit</button>
+			</div>
+		</form>
+	}
+	else
+	{
+		<div class="mt-5 d-flex align-items-center justify-content-center">
+			<div>
+				<img src="~/Images/Seller/approval-waiting.jpg" style="height: 450px; width: 400px;">
+				<h3 class="text-center">Waiting for Approval</h3>
+				<p class="text-center">you can sell the products once you are approved</p>
+			</div>
+		</div>
+	}
+}
+		
 
-	<div>
-		<button type="submit">Submit</button>
-	</div>
-</form>
+

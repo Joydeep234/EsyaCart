@@ -10,6 +10,7 @@
     {
         double sum = 0;
         <table class="w-100 table table-striped">
+<<<<<<< HEAD
             <thead class="border-top-0 border-end-0 border-start-0 border-dark border-2">
                 <tr class="my-5">
                     <th class="text-center">Product</th>
@@ -30,6 +31,28 @@
                         <td class="text-center cart-cell fs-4">@cartdata.ProductName</td>
                         <td class="text-center cart-cell fs-4">@cartdata.ProductQuantity</td>
                         <td class="text-center cart-cell fs-4">
+=======
+        <thead class="border-top-0 border-end-0 border-start-0 border-top-0 border-dark border-2">
+            <tr class="my-5">
+                <th class="text-center">Product</th>
+                <th class="text-center">Product Name</th>
+                <th class="text-center">Product Quantity</th>
+                <th class="text-center"> </th>
+                <th class="text-center">Price</th>
+            </tr>
+        </thead>  
+              
+        @foreach(var cartdata in Model.cartdata){
+            <tbody>
+                <tr class="border-top-0 border-end-0 border-start-0 border-top-0 border-dark border-1">
+                    <td class="text-center cart-cell">
+                        <img src="~/Uploads/@cartdata.ProductImageUrl" alt="" width="70px" height="70px">
+                    </td>
+                    <td class="text-center cart-cell fs-4">@cartdata.ProductName</td>
+                    <td class="text-center cart-cell fs-4">@cartdata.ProductQuantity</td>
+                    <td class="text-center cart-cell fs-4">
+                        
+>>>>>>> main
                             <div class="d-flex justify-content-center align-items-center cartbtncontainer2">
                                 <form method="post" class="ms-2">
                                     <button type="submit" asp-page-handler="DecreasefromCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-danger fs-3 px-3">-</button>
