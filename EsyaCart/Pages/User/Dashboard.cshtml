@@ -37,7 +37,7 @@
             <div class="col-md-3 m-4 d-flex align-items-stretch p-4 border">
                 <a asp-page="ShowProducts" asp-route-productcatagoryID="@product.Category_Id" class="text-dark text-decoration-none" style="width: 100%;">
                     <div class="card border border-0">
-                        <img src="~/Images/User/Logo.jpeg" class="card-img-top" alt="Product Image">
+                        <img src="~/Uploads/@product.ImageUrl" class="card-img-top" alt="Product Image">
                         <div class="card-body">
                             <h5 class="card-title text-center">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</h5>
                             <p class="card-text text-center">@product.Price</p>
