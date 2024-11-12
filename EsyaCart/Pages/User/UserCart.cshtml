@@ -1,24 +1,24 @@
 @page
 @model EsyaCart.Pages.User.UserCart
 @{
-    ViewData["Title"] = "UserCart";
+    double totalsum = 0;
 }
 
-
-
 <div class="table-responsive">
-     @if(Model.cartdata.Count>0){
+    @if(Model.cartdata.Count > 0)
+    {
         double sum = 0;
         <table class="w-100 table table-striped">
-        <thead class="border-top-0 border-end-0 border-start-0 border-top-0 border-dark border-2">
-            <tr class="my-5">
-                <th class="text-center">Product</th>
-                <th class="text-center">Product Name</th>
-                <th class="text-center">Product Quantity</th>
-                <th class="text-center"> </th>
-                <th class="text-center">Price</th>
-            </tr>
-        </thead>  
+
+            <thead class="border-top-0 border-end-0 border-start-0 border-dark border-2">
+                <tr class="my-5">
+                    <th class="text-center">Product</th>
+                    <th class="text-center">Product Name</th>
+                    <th class="text-center">Product Quantity</th>
+                    <th class="text-center"></th>
+                    <th class="text-center">Price</th>
+                </tr>
+            </thead>
               
         @foreach(var cartdata in Model.cartdata){
             <tbody>
@@ -31,7 +31,7 @@
                     <td class="text-center cart-cell fs-4">
                         
                             <div class="d-flex justify-content-center align-items-center cartbtncontainer2">
-                                 <form method="post" class="ms-2">
+                                <form method="post" class="ms-2">
                                     <button type="submit" asp-page-handler="DecreasefromCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-danger fs-3 px-3">-</button>
                                 </form>
                                 <h2 class="text-center mx-3">@cartdata.ProductQuantity.ToString()</h2>
@@ -39,23 +39,67 @@
                                     <button type="submit" asp-page-handler="AddToCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-primary fs-3">+</button>
                                 </form>
                             </div>
-                    </td>
-                    <td class="text-center cart-cell fs-4">@(cartdata.ProductPrice*cartdata.ProductQuantity)</td>
-                    <p style="display: none;">@(sum+=(cartdata.ProductPrice*cartdata.ProductQuantity))</p>
-                </tr>
-            </tbody>
-            
-        }
+                        </td>
+                        <td class="text-center cart-cell fs-4">@(cartdata.ProductPrice * cartdata.ProductQuantity)</td>
+                        <p style="display: none;">@(sum += (cartdata.ProductPrice * cartdata.ProductQuantity)) @(totalsum = sum)</p>
+                    </tr>
+                </tbody>
+            }
+
             <div class="carttotal">
-                    <button class="btn form-control btncolor btn-secondary">
-                        <span class="mx-3 fs-3">Your Total : @sum</span><span class="mx-3 fs-3">Checkout</span>
-                    </button>
+                <button class="btn form-control btncolor btn-secondary" data-bs-toggle="modal" data-bs-target="#cartModal">
+                    <span class="mx-3 fs-3">Your Total: @sum</span><span class="mx-3 fs-3">Checkout</span>
+                </button>
             </div>
         </table>
-    }else{
+    }
+    else
+    {
         <div class="classempty">
             <p>Cart Is Empty</p>
         </div>
     }
-   
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Your Cart Summary</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="w-100 table table-striped">
+                    <thead class="border-top-0 border-end-0 border-start-0 border-dark border-2">
+                        <tr class="my-5">
+                            <th class="text-center">Product</th>
+                            <th class="text-center">Product Name</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cartdata in Model.cartdata)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <img src="~/Images/User/Logo.jpeg" alt="Product Image" width="30px" height="30px">
+                                </td>
+                                <td class="text-center">@cartdata.ProductName</td>
+                                <td class="text-center">@cartdata.ProductQuantity</td>
+                                <td class="text-center">@(cartdata.ProductPrice * cartdata.ProductQuantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <h4 class="text-end">Total: @totalsum</h4>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a asp-page="../User/UserOrders" asp-route-TotalPrice="@totalsum" class="btn btn-primary">Proceed to Payment</a>
+            </div>
+        </div>
+    </div>
 </div>

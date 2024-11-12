@@ -1,0 +1,38 @@
+@page
+@model EsyaCart.Pages.User.UserProfile.Edituserprofile
+@{
+    ViewData["Title"] = "Edituserprofile";
+}
+
+
+<div class="setdivedit d-flex flex-column align-items-center justify-content-center">
+    <form method="post" class="">
+        <div class="d-flex align-items-center">
+            Email:<span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userAcc?.Email) ? "2rem" : "0.5rem");">
+             @Model.userAcc?.Email
+            </span>
+            Contact:<span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userAcc?.Contact_No) ? "2rem" : "0.5rem");">
+                @Model.userAcc?.Contact_No
+            </span>
+        </div>
+        <div class="d-flex align-items-center my-5 me-5">
+            <label asp-for="@Model.udmc.UserName"></label>
+            <input asp-for="@Model.udmc.UserName" class="form-control me-5" value="@Model.udmc.UserName"/>
+            <span asp-validation-for="@Model.udmc.UserName" class="text-danger"></span>
+            <label asp-for="@Model.udmc.Pincode" class=""></label>
+            <input asp-for="@Model.udmc.Pincode" class="form-control" value="@Model.udmc.Pincode"/>
+            <span asp-validation-for="@Model.udmc.Pincode" class="text-danger"></span>
+        </div>
+        <div class="d-flex align-items-center me-5">
+           <label asp-for="@Model.udmc.Landmark"></label>
+            <input asp-for="@Model.udmc.Landmark" class="form-control me-5" value="@Model.udmc.Landmark"/>
+            <span asp-validation-for="@Model.udmc.Landmark" class="text-danger"></span>
+            <label asp-for="@Model.udmc.Area" class=""></label>
+            <input asp-for="@Model.udmc.Area" class="form-control" value="@Model.udmc.Area"/>
+            <span asp-validation-for="@Model.udmc.Area" class="text-danger"></span>
+        </div>
+        <div class="d-flex align-items-center justify-content-center mt-5">
+            <button asp-page-handler="Edit" asp-route-id="@Model.userAcc.Account_Id" class="btn btn-primary px-5 py-2 fs-4">Save</button>
+        </div>
+    </form>
+</div>

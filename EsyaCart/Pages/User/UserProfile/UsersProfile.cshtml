@@ -1,0 +1,59 @@
+@page
+@model EsyaCart.Pages.User.UserProfile.UsersProfile
+@{
+    ViewData["Title"] = "UsersProfile";
+}
+
+<div class="btn btn-primary mt-3">
+    <a class="text-decoration-none text-white" asp-page="../UserProfile/Edituserprofile" asp-route-id="@Model.c_id">Edit Profile</a>
+</div>
+
+<div class="d-flex flex-column align-items-center justify-content-center">
+    @if (Model.userdetail != null && Model.userAcc != null)
+    {
+        <div class="d-flex align-items-center">
+            <span class="btn m-3 sp1" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userdetail.UserName) ? "2rem" : "1.5rem");">
+                @Model.userdetail.UserName
+            </span>
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userAcc.Email) ? "2rem" : "1.5rem");">
+                @Model.userAcc.Email
+            </span>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userAcc.Contact_No) ? "2rem" : "1.5rem");">
+                @Model.userAcc.Contact_No
+            </span>
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userdetail.Pincode.ToString()) ? "2rem" : "1.5rem");">
+                @Model.userdetail.Pincode
+            </span>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userdetail.Area) ? "2rem" : "1.5rem");">
+                @Model.userdetail.Area
+            </span>
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userdetail.Landmark) ? "2rem" : "1.5rem");">
+                @Model.userdetail.Landmark
+            </span>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex align-items-center">
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userAcc?.Email) ? "2rem" : "1.5rem");">
+                @Model.userAcc?.Email
+            </span>
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: @(string.IsNullOrEmpty(Model.userAcc?.Contact_No) ? "2rem" : "1.5rem");">
+                @Model.userAcc?.Contact_No
+            </span>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding:2rem;"></span>
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding:2rem;"></span>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: 2rem;"></span>
+            <span class="btn m-3" style="background-color: #e6e6e6; min-width: 20rem; padding: 2rem;"></span>
+        </div>
+    }
+</div>
+<script src="~/js/User.js" asp-append-version="true"></script>

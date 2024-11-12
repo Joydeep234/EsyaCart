@@ -3,7 +3,11 @@
     outline: none;
 }
 .hoverlink{
-    background-color: rgb(246, 246, 246);
+    background-color: rgb(255, 255, 255);
+}
+.addingshadow{
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px rgba(72, 72, 72, 0.827);
 }
 .hoverlink:hover h3{
     color: #157deb;
@@ -103,3 +107,92 @@ body{
     font-size: 100px;
     color: rgb(129, 129, 129);
 }
+.containermainupper{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containermain{
+    border-radius: 5px;
+    /* border: 1px solid black; */
+    width: max-content;
+    padding: 3rem 5rem;
+    box-shadow: 0px 0px 6px rgba(87, 87, 87, 0.697);
+
+}
+.payment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.border-circle{
+    text-align: center;
+    color: rgba(89, 188, 89, 0.763);
+    border: 2px solid rgba(89, 188, 89, 0.763);
+    border-radius:50%;
+    width: max-content;
+    padding: 0.4rem 1.2rem;
+}
+.btns{
+    
+    background-color: #157deb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btns:hover{
+    background-color: #5991cd;
+    box-shadow: 0px 0px 6px rgba(87, 87, 87, 0.697);
+}
+
+.settingborder{
+    box-shadow: 0px 0px 6px rgba(87, 87, 87, 0.697);
+    padding: 1rem;
+}
+.setimginorder {
+    height: 120px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.orderimg {
+    max-height: 96%;
+    max-width: 100%;
+    object-fit: contain;
+    box-shadow: 0px 0px 3px rgba(87, 87, 87, 0.697);
+}
+.sidebaraside{
+    position: fixed;
+}
+/* Left Sidebar Styling */
+.sidebarli {
+    list-style-type: none;
+    padding: 0;
+}
+
+.setting-a {
+    margin-bottom: 1rem;
+}
+
+/* Main Content Styling */
+main { /* Creates space for the sidebar */
+    margin-right: 5%;
+}
+
+/* Adjust sidebar spacing or color if necessary */
+aside {
+    background-color: #f8f9fa;
+    padding-top: 20px; /* Optional: Add top padding for a cleaner look */
+}
+.setdivedit{
+    border: 1px solid black;
+    width: 100%;
+    height: 100vh;
+}
+
