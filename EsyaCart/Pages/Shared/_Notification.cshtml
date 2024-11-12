@@ -1,13 +1,21 @@
-﻿
-	@{
-    if (TempData["Success"] != null)
-        {
-            <script src="~/lib/jquery/dist/jquery.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-            <script type="text/javascript">
-                toastr.success('@TempData["Success"]);
-                toastr.success('@TempData["Success"]',{ timeOut: 5000 })
-            </script>
-        }
-    }	
+﻿@{
+    var toastrMessage = TempData["ToastrMessage"] as string;
+    var toastrType = TempData["ToastrType"] as string; // "success", "error", "info", "warning"
+}
+
+@if (!string.IsNullOrEmpty(toastrMessage))
+{
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+        toastr["@toastrType"]("@toastrMessage");
+    </script>
+}
+
+
+
 

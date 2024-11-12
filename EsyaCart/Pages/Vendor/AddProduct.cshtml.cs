@@ -10,6 +10,8 @@ namespace EsyaCart.Pages.Vendor
 {
     public class AddProduct : PageModel
     {
+
+        public bool approval;
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _environment;
 
@@ -23,7 +25,10 @@ namespace EsyaCart.Pages.Vendor
         public AddProductModel addProductModel { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
-        {   
+        {
+            var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == 4).FirstOrDefault();
+            approval = vendorData.IsApproved;
+
             ViewData["CategoryList"] = await _context.Catagory
                 .Select(c => new SelectListItem
                 {
