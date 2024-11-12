@@ -48,10 +48,12 @@ namespace EsyaCart.Pages.Vendor
                 UpdatedData.Price = editProducts.Price;
                 UpdatedData.Quantity = editProducts.Quantity;
                 UpdatedData.Description = editProducts.Description;
+                UpdatedData.updatedAt = DateTime.Now;
 
                 _context.SaveChanges();
 
-                TempData["Success"] = "Details Updated Successfully";
+                TempData["ToastrMessage"] = "Product details updated successfully!";
+                TempData["ToastrType"] = "success"; // Options: "success", "error", "info", "warning"
 
                 return RedirectToPage("/Vendor/ViewProducts");
             }

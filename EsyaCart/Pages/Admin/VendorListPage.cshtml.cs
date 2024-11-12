@@ -21,7 +21,7 @@ namespace EsyaCart.Pages.Admin
             AllVendorDetailsList = await (from Account in _context.Account
                                           join VendorDetails in _context.VendorDetails
                                          on Account.Account_Id equals VendorDetails.Accounts_Id
-                                          where Account.Account_type == "VENDOR"
+                                          where Account.Account_type == "SELLER"
                                           select new AllVendorDetails
                                           {
                                                 VendorID = VendorDetails.VendorID,
