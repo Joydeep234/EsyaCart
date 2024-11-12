@@ -8,39 +8,40 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/AdminHomePageStyleSheet.css" asp-append-version="true"   />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="col-2 col-md-2 col-xl-2 px-sm-2 px-0 bg-light position-fixed">
+            <div class="col-2 col-md-2 col-xl-2 px-sm-2 px-0 position-fixed" style="background-color:rgb(237,241,243);">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <div class="mx-2">
-                        <img src="~/Images/Admin/logo4.png" alt="Alternate Text" height="80" width="120" />
+                        <img class="image" src="~/Images/Admin/logo4.png" alt="Alternate Text" height="80" width="120"/>
                     </div>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li class="nav-item">
-                            <a asp-page="/Admin/AdminHomePage" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">DashBoard</span>
+                        <li class="nav-item mt-3">
+                            <a asp-page="/Admin/AdminHomePage" class=" align-middle px-0">
+                                <i class="fa-solid fa-house"></i> <span class="ms-1 d-none d-sm-inline">DashBoard</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mt-2">
                             <a asp-page="/Admin/UserListPage" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
+                                <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mt-2">
                             <a asp-page="/Admin/VendorListPage" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Vendor</span>
+                                <i class="fa-regular fa-id-card"></i> <span class="ms-1 d-none d-sm-inline">Vendor</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="nav-item mt-2">
                             <a  asp-page="/Admin/OrderList"   class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
+                                <i class="fa-solid fa-table-cells-row-unlock"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
+                        </li
+                        <li class="nav-item mt-2">
                             <a asp-page="/Admin/ProductsList" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Products</span>
+                               <i class="fa-solid fa-box-open"></i> <span class="ms-1 d-none d-sm-inline">Products</span>
                             </a>
                         </li>
                     </ul>
@@ -48,7 +49,7 @@
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="/Images/Admin/AdminProfile.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">Admin</span>
+                            <span class="d-none d-sm-inline mx-1" id="admin">Admin</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <li><a class="dropdown-item" href="#">Settings</a></li>

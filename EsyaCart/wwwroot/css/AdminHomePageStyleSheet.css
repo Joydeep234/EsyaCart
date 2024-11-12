@@ -21,3 +21,24 @@
     font-size:15px;
     margin-left:15px;
 }
+
+
+#count {
+    width: 25rem;
+}
+#count:hover {
+   
+    background-color: rgb(237,241,243);
+}
+
+.col-2 a {
+    color: black; /* Replace with your desired color */
+    text-decoration: none;
+    
+}
+
+    .col-2 a:hover {
+        color: rgb(114,174,200); /* Replace with your desired hover color */
+    }
+
+    
