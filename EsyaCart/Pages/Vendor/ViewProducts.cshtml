@@ -1,10 +1,12 @@
 ﻿@page
 @model EsyaCart.Pages.Vendor.ViewProducts
 @{
-
+    // style="box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;"
 }
 @{
-    <div class="border border-light rounded-2 py-2 mx-4 d-flex g-5">
+    if (Model.approval == true)
+    {
+        <div class="border border-light rounded-2 py-2 mx-5 d-flex g-5">
         @foreach (var category in Model.categoryList)
         {
             <form asp-page-handler="Category" asp-route-categoryId="@category.Catagory_Id">
@@ -13,16 +15,15 @@
         }
     </div>
 
-    if (Model.approval == true)
-    {   
-        <div class="row g-2 mx-5">
-            @{
-                if (@Model.productReviews.Count != 0)
+    <div class="row g-2 mx-5 mt-3">
+         @{
+                if (Model.productReviews.Count != 0)
                 {
                     foreach (var product in Model.productReviews)
                     {
                         <div class="col-12">
-                            <div class="card p-4 bg-light rounded-3 mb-3" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;">
+                            <div class="card border-0 p-4 rounded-3 product__card">
+                               
                                 <div class="row align-items-center">
                                     <aside class="col-md-2">
                                         <a href="#">
@@ -31,14 +32,22 @@
                                     </aside>
                                     <div class="col-md-6">
                                         <div class="info-main">
-                                            <h2 class="h5 title">@product.ProductName</h2>
+                                            <h2 class="h5 product__title">@product.ProductName</h2>
                                             <div class="d-flex my-3">
                                                 @{
                                                     int num = Convert.ToInt32(product.Ratings);
-                                                    for (int i = 0; i < num; i++)
+                                                    if(num == 0)
                                                     {
-                                                        <i class="star fas fa-star text-warning mr-1"></i>
+                                                        <span class="text-sm">No Ratings/Reviews are added</span>
                                                     }
+                                                    else
+                                                    {
+                                                        for (int i = 0; i < num; i++)
+                                                        {
+                                                            <i class="star fas fa-star text-warning mr-1"></i>
+                                                        }
+                                                    }
+                                                    
                                                 }
 
 
@@ -59,16 +68,22 @@
                                                 if (product.IsActive == true)
                                                 {
                                                     <form method="post" class="mx-1">
-                                                        <a asp-page="/Vendor/EditProduct" asp-route-productId="@product.Product_Id" class="btn btn-warning btn-sm btn-block text-dark mx-1">
+                                                        <a asp-page="/Vendor/EditProduct" asp-route-productId="@product.Product_Id" class="btn mx-1 edit__btn">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
+                                                    </form>
+                                                    <form asp-page-handler="Disable" asp-route-productId="@product.Product_Id" method="post" class="mx-1">
+                                                        <button type="submit" class="btn edit__btn btn-sm btn-block text-light mx-3">
+                                                            <i class="fa-regular fa-square-check"></i>
+                                                            Disable
+                                                        </button>
                                                     </form>
                                                 }
                                                 else
                                                 {
                                                     <form method="post" class="mx-1" asp-route-productId="@product.Product_Id" asp-page-handler="Enable">
-                                                        <button type="submit" class="btn btn-danger btn-sm btn-block text-light mx-1">
+                                                        <button type="submit" class="btn btn-danger btn-sm btn-block text-light mx-3">
                                                             <i class="fa-regular fa-square-check"></i>
                                                             Enable
                                                         </button>

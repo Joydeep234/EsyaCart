@@ -20,17 +20,28 @@ namespace EsyaCart.Pages.Vendor
 
         [BindProperty]
         public VendorDetailsModel vendorDetailsModel { get; set; }
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-			var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == 4).FirstOrDefault();
-			approval = vendorData.IsApproved;
-			
-
+			var sessionData = HttpContext.Session.GetString("VendorSessionId");
+			if(sessionData != null)
+			{
+                int vendorSessionId = Convert.ToInt32(sessionData);
+                var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == vendorSessionId).FirstOrDefault();
+                approval = vendorData.IsApproved;
+                return Page();
+            }
+			else
+			{
+				return RedirectToPage("/Vendor/VendorLogin");
+			}
+				
 		}
 
         public async Task<IActionResult> OnPostAsync() {
 
-			var UpdatedData = _context.VendorDetails.Where(p => p.Accounts_Id == 4).FirstOrDefault();
+            int vendorSessionId = Convert.ToInt32(HttpContext.Session.GetString("VendorSessionId"));
+
+            var UpdatedData = _context.VendorDetails.Where(p => p.Accounts_Id == vendorSessionId).FirstOrDefault();
 			// 9 = Session Id
 			if (UpdatedData != null)
 			{

@@ -13,20 +13,23 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Vendor.css" asp-append-vesrsion="true" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
 <body>
     <section class="p-3 p-md-4 p-xl-5">
         <div class="container">
-            <div class="card border-light-subtle shadow-sm">
+            <div class="card border-light-subtle shadow-sm login__card">
                 <div class="row g-0">
-                    <div class="col-12 col-md-6 text-bg-primary">
+                    <div class="col-12 col-md-6">
                         <div class="d-flex align-items-center justify-content-center h-100">
-                            <div class="col-10 col-xl-8 py-3">
-                                <img class="img-fluid rounded mb-4" loading="lazy" src="./assets/img/bsb-logo-light.svg" width="245" height="80" alt="BootstrapBrain Logo">
+                            <div class="col-10 col-xl-8 py-1">
+                                <img class="img-fluid mb-2 mx-auto" loading="lazy" src="~/Images/Seller/esyacart-removebg-preview.png" width="110" height="30" alt="BootstrapBrain Logo">
                                 <hr class="border-primary-subtle mb-4">
-                                <h2 class="h1 mb-4">We make digital products that drive you to stand out.</h2>
-                                <p class="lead m-0">We write words, take photos, make videos, and interact with artificial intelligence.</p>
+                                <h2 class="h1 mb-4 login__title">
+                                    Bring your brand on Esyacart.in
+                                </h2>
+                                <p class="lead m-0 login__tagline">Pay lesser selling fee* with every order on India's most visited online shopping destination.</p>
                             </div>
                         </div>
                     </div>
@@ -34,8 +37,8 @@
                         <div class="card-body p-3 p-md-4 p-xl-5">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="mb-5">
-                                        <h3>Log in</h3>
+                                    <div class="mb-3">
+                                        <h3 class="login__card__title">Log in</h3>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +57,7 @@
                                     
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn bsb-btn-xl btn-success" type="submit">Login</button>
+                                            <button class="btn bsb-btn-xl login__btn" type="submit">Login</button>
                                         </div>
                                     </div>
                                 </div>

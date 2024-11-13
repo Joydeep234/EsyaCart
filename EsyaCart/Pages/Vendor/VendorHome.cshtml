@@ -7,31 +7,49 @@
 @{
 	if (Model.approval)
     {
-		<h1>Please add additional details</h1>
-		<form method="post">
-			<div>
-				<label asp-for="vendorDetailsModel.VendorName" class="form-label">Vendor Name</label>
-				<input asp-for="vendorDetailsModel.VendorName" class="form-control" />
-			</div>
-			<div>
-				<label asp-for="vendorDetailsModel.VendorName" class="form-label">Area</label>
-				<input asp-for="vendorDetailsModel.Area" class="form-control" />
-			</div>
+		<section class="m-0 p-0 mx-5">
+			<div class="card mx-5 border-0 addDetails__card">
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <div class="p-md-4 py-5">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-2">
+                                            <h2 class="h3">Add more Details</h2>
+                                        </div>
+                                    </div>
+                                </div>
+								<form method="post">
+									<div>
+										<label asp-for="vendorDetailsModel.VendorName" class="form-label">Vendor Name</label>
+										<input asp-for="vendorDetailsModel.VendorName" class="form-control" />
+									</div>
+									<div>
+										<label asp-for="vendorDetailsModel.VendorName" class="form-label">Area</label>
+										<input asp-for="vendorDetailsModel.Area" class="form-control" />
+									</div>
 
-			<div>
-				<label asp-for="vendorDetailsModel.Landmark" class="form-label">Landmark</label>
-				<input asp-for="vendorDetailsModel.Landmark" class="form-control" />
-			</div>
+									<div>
+										<label asp-for="vendorDetailsModel.Landmark" class="form-label">Landmark</label>
+										<input asp-for="vendorDetailsModel.Landmark" class="form-control" />
+									</div>
 
-			<div>
-				<label accesskey="vendorDetailsModel.Pincode" class="form-label">Pincode</label>
-				<input asp-for="vendorDetailsModel.Pincode" class="form-control" />
-			</div>
+									<div>
+										<label accesskey="vendorDetailsModel.Pincode" class="form-label">Pincode</label>
+										<input asp-for="vendorDetailsModel.Pincode" class="form-control" />
+									</div>
 
-			<div>
-				<button type="submit">Submit</button>
+									<div class="d-flex justify-content-center mt-3">
+										<button class="btn vedndor__btn" type="submit">Submit</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-		</form>
+		</section>
 	}
 	else
 	{
