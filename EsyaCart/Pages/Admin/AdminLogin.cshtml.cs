@@ -18,12 +18,19 @@ namespace EsyaCart.Pages.Admin
         
 
       /*  public Account Account { get; set; }*/
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            var sessionId = HttpContext.Session.GetString("AdminSessionId");
+            if (sessionId != null)
+            {
+                return RedirectToPage("/Admin/AdminHomePage");
+            }
+            return Page();
         }
         public IActionResult OnPostAdminLogin() 
         {
-            
+            HttpContext.Session.SetString("AdminSessionId", "AdminLoginByLikhith@123");
+            Console.WriteLine($"Admin session {HttpContext.Session.GetString("AdminSessionId")}");
             if (!ModelState.IsValid)
             {
                 return Page();

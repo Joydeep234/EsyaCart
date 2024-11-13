@@ -16,8 +16,18 @@ namespace EsyaCart.Pages.Admin
         public List<VendorDetails> VendorList { get; set; }
 
         public List<AllVendorDetails> AllVendorDetailsList {  get; set; } = new List<AllVendorDetails>();
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
+            var sessionId = HttpContext.Session.GetString("AdminSessionId");
+            if (sessionId == null)
+            {
+                return RedirectToPage("/Admin/AdminLogin");
+            }
+            
+
             AllVendorDetailsList = await (from Account in _context.Account
                                           join VendorDetails in _context.VendorDetails
                                          on Account.Account_Id equals VendorDetails.Accounts_Id
@@ -34,15 +44,18 @@ namespace EsyaCart.Pages.Admin
                                                 CreatedAt = Account.CreatedAt
                                           }).ToListAsync();
             /*VendorList = _context.VendorDetails.ToList();*/
+            return Page();
         }
         public async Task<IActionResult> OnPostUpdateAsync(int VendorID, bool status)
         {
             
             var vendor2 = _context.VendorDetails.Find(VendorID);
             var account = _context.Account.Find(vendor2.Accounts_Id);
+
             
 
-            /*var vendor = await _context.VendorDetails.FirstOrDefaultAsync(vd=>vd.VendorID == VendorID);*/
+
+            
             if (vendor2 == null)
             {
                 return NotFound();
@@ -50,26 +63,31 @@ namespace EsyaCart.Pages.Admin
             else
             {
                 account.IsActive = status;
+                
                 await _context.SaveChangesAsync();
                 return RedirectToPage();
             }
+
+
         }
-        /*public async Task<IActionResult> OnPostDeleteAsync(int VendorID)
+
+        public async Task<IActionResult> OnPostApproveAsync( int VendorID, bool status)
         {
-            var vendor = await _context.VendorDetails.FindAsync(VendorID);
-            
-            if (vendor == null)
+            var vendor2 = _context.VendorDetails.Find(VendorID);
+            if (vendor2 == null)
             {
-                return RedirectToPage();
+                return NotFound();
             }
             else
             {
-                 _context.VendorDetails.Remove(vendor);
-                 
+               
+                vendor2.IsApproved = status;
+                await _context.SaveChangesAsync();
+                return RedirectToPage();
             }
-            
-            return RedirectToPage();
-        }*/
+
+        }
+        
     }
     public class AllVendorDetails
     {

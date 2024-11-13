@@ -53,11 +53,17 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <button class="dropdown-item" type="button"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Profile</button>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/Admin/AdminLogin">Sign out</a></li>
+                            <li>
+                               <li><a class="dropdown-item" asp-page="/Admin/LogOutPage">Sign out</a></li>
+
+                            </li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -77,6 +83,40 @@
 
 @await RenderSectionAsync("Scripts", required: false)
 
+
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header" style="background-color:#DEE2E6;">
+    <h5 class="offcanvas-title align-content-center"  id="offcanvasScrollingLabel">Admin's Profile</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" style="background-color:#DEE2E6;">
+    <div class="d-flex justify-content-center " style=" background-color:#DEE2E6; ">
+        <img src="~/Images/Admin/Admin-profile-pic-removebg-preview.png" alt="Alternate Text" style="background-color:#DEE2E6; height:200px"/>
+    </div>
+    <div class="mt-1">
+          <ul class="list-group list-group-flush" >
+          <li class="list-group-item">Name: Sooraj</li>
+          <li class="list-group-item">Phone Number: 9999999999</li>
+          <li class="list-group-item">Email: sooraj@esyacart.com</li>
+          <li class="list-group-item">Address: Manipal,Udupi</li>
+          <li class="list-group-item">Pin: 563104</li>
+        </ul>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
+
+
+
+
+
+
+<!-- Modal -->
+
+
+
+
 

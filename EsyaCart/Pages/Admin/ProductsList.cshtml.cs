@@ -19,9 +19,17 @@ namespace EsyaCart.Pages.Admin
         //public List<sellerDetails> Details { get; set; }
 
         public List<sellerDetails> productList;
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
             //productList = await _context.Products.ToListAsync();
+            Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
+            var sessionId = HttpContext.Session.GetString("AdminSessionId");
+            if (sessionId == null)
+            {
+                return RedirectToPage("/Admin/AdminLogin");
+            }
 
             productList = await (from VendorDetails in _context.VendorDetails
                                  join Products in _context.Products
@@ -35,6 +43,8 @@ namespace EsyaCart.Pages.Admin
                                      Description = Products.Description,
                                      ImageUrl = Products.ImageUrl
                                  }).ToListAsync();
+
+            return Page();
         }
 
 

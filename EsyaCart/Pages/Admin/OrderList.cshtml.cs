@@ -17,8 +17,20 @@ namespace EsyaCart.Pages.Admin
 
         public List<AllOrderDetails> AllOrders { get; set; }
 
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
+            var sessionId = HttpContext.Session.GetString("AdminSessionId");
+            if (sessionId == null)
+            {
+                return RedirectToPage("/Admin/AdminLogin");
+            }
+
+
+
+
             AllOrders = await (from Orders in _context.Orders
                                join OrderItems in _context.OrderItems
                               on Orders.Order_id equals OrderItems.Order_Id
@@ -33,6 +45,8 @@ namespace EsyaCart.Pages.Admin
                                    TotalPrice = Orders.TotalPrice,
                                    isDelivered = Orders.isDelivered
                                }).ToListAsync();
+
+            return Page();
         }
 
 
