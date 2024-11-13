@@ -25,18 +25,22 @@ namespace EsyaCart.Pages.User.UserProfile
             _logger = logger;
             _context = Dbcontext;
         }
-
+         public string logoutchecksession {get;set;} = "";
+        public int customerid { get; set; } 
         public async Task<IActionResult> OnGet()
         {
            try
            {
-             
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
+                customerid = HttpContext.Session.GetInt32("CustomerId")??0;
+                if(logoutchecksession==null || customerid==0 ||customerid==null)return RedirectToPage("../../User/UserLogin");
+
              orderdet = await(from order in _context.Orders
              join ordItems in _context.OrderItems
              on order.Order_id equals ordItems.Order_Id
              join prod in _context.Products
              on ordItems.Product_Id equals prod.Product_Id
-             where order.Customer_Id==1
+             where order.Customer_Id==customerid
              select new UserOrdersDetails{
                 Product_id = prod.Product_Id,
                  ProdQuantity = ordItems.Quantity,
@@ -61,17 +65,22 @@ namespace EsyaCart.Pages.User.UserProfile
         public async Task<IActionResult> OnPostEditReviews(int prodid){
             try
             {
-                
-                review = await _context.Reviews.FirstOrDefaultAsync(p=>p.Product_Id==prodid && p.Customer_Id==1);
+                Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+                Response.Headers["Pragma"] = "no-cache";
+                Response.Headers["Expires"] = "0";
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
+                customerid = HttpContext.Session.GetInt32("CustomerId")??0;
+                Console.WriteLine($"productid is====>{prodid}");
+                review = await _context.Reviews.FirstOrDefaultAsync(p=>p.Product_Id==prodid && p.Customer_Id==customerid);
                 if(review==null){
-                    // if(!ModelState.IsValid)
-                    // {
-                    //     throw new Exception("Error in data fetching from reviews input");
-                    // }
+                    if(!ModelState.IsValid)
+                    {
+                        throw new Exception("Error in data fetching from reviews input");
+                    }
                     var rev = new Reviews{
                         Ratings = reviewmodel.Ratings,
                         Description = reviewmodel.Description,
-                        Customer_Id = 1,
+                        Customer_Id = customerid,
                         Product_Id = prodid
                     };
                     await _context.Reviews.AddAsync(rev);

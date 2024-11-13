@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/user.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
+    
+        
+  
 </head>
-<body>
+<body class="" style="background-color: #E3F2FD;">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container row">
@@ -18,7 +21,7 @@
                     <a class="navbar-brand" asp-area="" asp-page="/User/Dashboard"><img src="~/Images/User/Logo.jpeg" alt="" srcset="" width="100px" height="60px" class="rounded rounded-2"> </a>
                 </div>
                 <div class="col-7">
-                    <div class="row" style="background-color:#F0F5FF;">
+                    <div class="row" style="background-color:#EDF2FB;">
                         <div class=" col-1 p-2 text-center">
                             <i class="fa-solid fa-magnifying-glass fs-3"></i>
                         </div>
@@ -35,9 +38,17 @@
                             </a>
                         </div>
                         <div class="logintext">
-                            <a asp-page="../User/UserLogin" class="d-flex text-decoration-none text-dark fs-5">
-                            <p class="">Login</p>
-                            </a>
+                            
+                            @if(Model.logoutchecksession!=null){
+                                <a asp-page="../User/UserLogout" class="d-flex text-decoration-none text-dark fs-5">
+                                <p class="">Logout</p>
+                                </a>
+                            }else{
+                                <a asp-page="../User/UserLogin" class="d-flex text-decoration-none text-dark fs-5">
+                                <p class="">Login</p>
+                                </a>
+                            }
+                            
                         </div>
                     </div>
                 </div>
@@ -64,7 +75,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -74,6 +85,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/User.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

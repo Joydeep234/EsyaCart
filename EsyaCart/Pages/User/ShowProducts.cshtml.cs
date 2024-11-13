@@ -23,10 +23,15 @@ namespace EsyaCart.Pages.User
         }
 
         public List<Products> productsEntity {get; set;} = new List<Products>();
+        public string logoutchecksession {get;set;} = "";
         public async Task OnGet(string productcatagoryID)
         {
             try
             {
+                Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+                Response.Headers["Pragma"] = "no-cache";
+                Response.Headers["Expires"] = "0";
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
                 var categoryId = int.Parse(productcatagoryID);
                     productsEntity = await _context.Products
                                                 .Where(p => p.Category_Id == categoryId)

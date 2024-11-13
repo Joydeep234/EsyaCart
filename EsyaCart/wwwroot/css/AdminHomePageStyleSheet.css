@@ -41,4 +41,11 @@
         color: rgb(114,174,200); /* Replace with your desired hover color */
     }
 
+#loginButton {
+    background-color: #343A40;
+    color: #F8F9FA;
+}
+    #loginButton:hover {
+        background-color: #212529;
+    }
     
