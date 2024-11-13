@@ -25,8 +25,12 @@ namespace EsyaCart.Pages.User
 
         [BindProperty]
         public LoginModelClass LInput { get; set; } = new LoginModelClass();
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            var UsersessionId = HttpContext.Session.GetString("UserSessionId");
+            Console.WriteLine($"Usersession id===>{UsersessionId}");
+            if(UsersessionId!=null)return RedirectToPage("../User/Dashboard");
+            return Page();
         }
 
         public async Task<IActionResult> OnPost(){
@@ -43,6 +47,8 @@ namespace EsyaCart.Pages.User
                    {
                        throw new Exception("Enter Correct Login Details");
                    }
+                   HttpContext.Session.SetString("UserSessionId","UserSesseionValueSettinByJoydeep@1047893#hdfkjhfe");
+                   HttpContext.Session.SetInt32("CustomerId",author.Account_Id);
                    return RedirectToPage("../User/Dashboard");
                }
              }

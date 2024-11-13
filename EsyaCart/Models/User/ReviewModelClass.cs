@@ -9,9 +9,9 @@ namespace EsyaCart.Models.User
     public class ReviewModelClass
     {
       
+        [Range(0.0, 5.0, ErrorMessage = "Ratings must be between 0 and 5")]
         public float Ratings { get; set; }
 
-        [Required, StringLength(200)]
         public string Description { get; set; }
         [Required]
         public int Customer_Id { get; set; }  // Customer_Id == Account.Account_Id

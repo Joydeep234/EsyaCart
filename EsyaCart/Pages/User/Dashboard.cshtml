@@ -5,52 +5,88 @@
     ViewData["Title"] = "Dashboard";
 }
 
-
-<div class="mb-5">
+<div class="setincarosel rounded" style="width:95vw; margin: 0px 40px;">
     <div id="carouselExampleControls" class="carousel slide setheight" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="~/Images/User/Logo.jpeg" class="d-block w-100 setheight" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="~/Images/User/Logo.jpeg" class="d-block w-100 setheight" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="~/Images/User/Logo.jpeg" class="d-block w-100 setheight" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+        <div class="carousel-inner" >
 
-<div class="row mt-5">
-    @if (Model.productsEntity.Count > 0)
-    {
-        @foreach (var product in Model.productsEntity)
-        {
-            <div class="col-md-3 m-4 d-flex align-items-stretch p-4 border">
-                <a asp-page="ShowProducts" asp-route-productcatagoryID="@product.Category_Id" class="text-dark text-decoration-none" style="width: 100%;">
-                    <div class="card border border-0">
-                        <img src="~/Uploads/@product.ImageUrl" class="card-img-top" alt="Product Image">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</h5>
-                            <p class="card-text text-center">@product.Price</p>
-                        </div>
-                    </div>
-                </a>
+            <div class="carousel-item active" data-bs-interval="5000">
+                <video src="~/vedio/User/vedio1.mp4" class="d-block w-100 setheight" style="object-fit: cover;" autoplay loop muted disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"></video>
+                <div class="applytext">
+                    <p>Galaxy Zfold | Zflip6</p>
+                    <p class="applytext_p">Get complete device protection twice a year at just ₹999*<br>Plus, avail up to 24 mo. No Cost EMI</p>
+                </div>
             </div>
-        }
-    }
-    else
-    {
-        <h1>Products Not Available</h1>
-    }
-</div>
+            <div class="carousel-item" data-bs-interval="5000">
+              <video src="~/vedio/User/vedio5.mp4" class="d-block w-100 setheight" style="object-fit: cover;" autoplay loop muted disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"></video>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <video src="~/vedio/User/vedio2.mp4" class="d-block w-100 setheight" style="object-fit: cover;" autoplay loop muted disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"></video>
+                <div class="applytext">
+                    <p>Galaxy S24 Ultra </p>
+                    <p class="applytext_p fs-3">Galaxy AI is here<br>Now in Titanium Yellow</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+              <video src="~/vedio/User/vedio3.mp4" class="d-block w-100 setheight" style="object-fit: cover;" autoplay loop muted disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"></video>
+                  <div class="applyflex">
+                      <p class="" style="color: white;">Galaxy Ultra Watch </p>
+                      <p class="fs-4" style="color: white;">Starting ₹2999/mo* (18 mo. No Cost EMI)</p>                  </div>
+                  </div>
+            <div class="carousel-item" data-bs-interval="5000">
+              <video src="~/vedio/User/vedio4.mp4" class="d-block w-100 setheight" style="object-fit: cover;" autoplay loop muted disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"></video>
+            </div>
+            
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <div class="prev__btnclass">
+                <span class="carousel-control-prev-icon"></span>
+            </div>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <div class="prev__btnclass">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </div>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 
+    <div class="d-flex align-items-center justify-content-center mt-5">
+        <p class="applytext_prod">Our Products</p>
+    </div>
+    <div class="row mt-5 ">
+  <div class="d-flex align-items-center justify-content-center">
+    <a asp-page="../User/Dashboard" asp-route-catagoryName = "" class="border_catagory p-2 fs-5 mx-3">All</a>
+    <a asp-page="../User/Dashboard" asp-route-catagoryName = "Mobile" class="border_catagory p-2 fs-5 mx-3">Mobiles</a>
+    <a asp-page="../User/Dashboard" asp-route-catagoryName = "Tablets" class="border_catagory p-2 fs-5 mx-3">Tablets</a>
+    <a asp-page="../User/Dashboard" asp-route-catagoryName = "Laptop" class="border_catagory p-2 fs-5 mx-3">Laptop</a>
+    <a asp-page="../User/Dashboard" asp-route-catagoryName = "Watches" class="border_catagory p-2 fs-5 mx-3">Watches</a>
+  </div>
+    <!-- New Product Carousel Section -->
+    <div class="product-carousel-wrapper mt-5">
+        <button class="carousel-btn prev-btn">&#10094;</button>
+        <div class="product-carousel">
+            @if (Model.productsEntity.Count > 0)
+            {
+                @foreach (var product in Model.productsEntity)
+                {
+                    <div class="product-item" style="background-color: #E9ECEF;">
+                        <a asp-page="ShowProducts" asp-route-productcatagoryID="@product.Category_Id" class="text-dark text-decoration-none">
+                            <img src="~/Uploads/@product.ImageUrl" alt="@product.ProductName" />
+                            <h5>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</h5>
+                            <p class="text-success">₹@string.Format("{0:N2}", product.Price)</p>
+                            <form method="post" class=" d-flex">
+                              <button class="Addcart-btn mx-2 text-white" asp-page-handler="AddCartAndBuy" asp-route-prodId="@product.Product_Id" style="border: none; display:none;" ><i class="fa-solid fa-cart-shopping"></i></button>
+                              <a class="buy-now-btn mx-2 text-decoration-none text-white" asp-page="../User/Productanddetails" asp-route-productID="@product.Product_Id" style="border: none; display:none;">Buy</a>
+                            </form>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h1 class="text-center">Products Not Available</h1>
+            }
+        </div>
+        <button class="carousel-btn next-btn">&#10095;</button>
+    </div>
 </div>
