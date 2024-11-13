@@ -3,8 +3,16 @@
 @{
     double totalsum = 0;
 }
+@if(TempData["datamsg"]!=null)
+{
+    <div class="fs-5 text-danger text-center">
+    @TempData["datamsg"] 
+    </div>
+}
 
-<div class="table-responsive">
+<div class="w-100 d-flex justify-content-center">
+    @if(Model.setbtnlologin==1){
+    <div class="table-responsive w-100 ms-5">
     @if(Model.cartdata.Count > 0)
     {
         double sum = 0;
@@ -15,6 +23,7 @@
                     <th class="text-center">Product</th>
                     <th class="text-center">Product Name</th>
                     <th class="text-center">Product Quantity</th>
+                    <th class="text-center"></th>
                     <th class="text-center"></th>
                     <th class="text-center">Price</th>
                 </tr>
@@ -39,6 +48,11 @@
                                     <button type="submit" asp-page-handler="AddToCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-primary fs-3">+</button>
                                 </form>
                             </div>
+                            <td>
+                                <form method="post" class="me-2">
+                                    <button type="submit" asp-page-handler="RemovefromCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-danger fs-4"><i class="fa-regular fa-trash-can"></i></button>
+                                </form>
+                            </td>
                         </td>
                         <td class="text-center cart-cell fs-4">@(cartdata.ProductPrice * cartdata.ProductQuantity)</td>
                         <p style="display: none;">@(sum += (cartdata.ProductPrice * cartdata.ProductQuantity)) @(totalsum = sum)</p>
@@ -55,9 +69,7 @@
     }
     else
     {
-        <div class="classempty">
-            <p>Cart Is Empty</p>
-        </div>
+        <div></div>
     }
 </div>
 
@@ -102,4 +114,22 @@
             </div>
         </div>
     </div>
+</div>
+}else if(Model.setbtnlologin==0){
+    <div class="stylecartemptydiv">
+        <div class="d-flex flex-column  align-items-center justify-content-center">
+            <i class="fa-solid fa-cart-shopping fs-4 m-3"></i>
+            <p class="fs-4 m-3">Your Cart Is Empty</p>
+        </div>
+        <div class="">
+            <div class="btn btn-secondary py-2 px-4">
+            <a asp-page="../User/Dashboard" class="text-decoration-none text-white">Go To Shopping</a>
+            </div>
+            <div class="btn btn-danger py-2 px-4">
+                <a asp-page="../User/UserLogin" class="text-decoration-none text-white">Go To Login</a>
+            </div>
+        </div>
+    </div>
+}
+
 </div>

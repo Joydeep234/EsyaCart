@@ -7,6 +7,12 @@
 
 
 <div class="container">
+    @if(TempData["datamsg"]!=null)
+    {
+        <div class="text-danger fs-4 text-center">
+        @TempData["datamsg"]
+        </div>
+    }
     <div class="container-main">
         <div class="image-container">
             <img src="~/Uploads/@Model.ProductInfo.ImageUrl" alt="" class="img border border-2 p-4">
@@ -32,21 +38,39 @@
         }
         <div class="detailsContainer">
                     <div class="">                
-                        <div class="">
-                            <h3>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Model.ProductInfo.ProductName.ToLower())</h3>
-                            <h4 class="ms-3">@Model.ProductInfo.Price</h4>
+                        <div class="" >
+                            <h3  style="color: #495057;">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Model.ProductInfo.ProductName.ToLower())</h3>
+                            <p class="fs-4" style="font-weight: 500; color: #495057;">₹ @Model.ProductInfo.Price</p>
                         </div>
-                        <p>@Model.ProductInfo.Description</p>  
+
+                        <div class="">
+                            <h3 class=""  style="color: #495057;">Product Description</h3>
+                            <p class="fs-5" style="color: #495057;">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Model.ProductInfo.Description.ToLower())</p> 
+                        </div> 
                     </div>
 
-                <div class=" border border-1 border-dark p-4">
-                    <h2 class="reviewstext">Reviews & Rating</h2>
+                <div class="border border-1 border-dark p-4" style="color: #495057;">
+                    <h2 class="reviewstext" style="color: #495057;">Reviews & Rating</h2>
                     @if(Model.ProductReviewDetails.Count>0){
                             @foreach(var review in Model.ProductReviewDetails){
                         <div class="">
                             <p>@review.UserName</p>
-                            <div class="text-white" style="background-color: rgb(17, 86, 17); width: max-content;">
-                                <p class="px-3">@review.Ratings  <i class="fa-solid fa-star" style="color: #ffffff;"></i></p>
+                            <div class="text-white d-flex" style="width: max-content;">
+                                
+                                @{
+                                    int integerPart=0;
+                                    double decimalPart=0;
+                                    integerPart = (int)Math.Truncate(review.Ratings); 
+                                    decimalPart = review.Ratings - integerPart;
+                                    if(integerPart>0){
+                                        for(int i=0;i<integerPart;i++){
+                                            <p class="px-1 fs-6"><i class="fa-solid fa-star" style="color:#ffc800;"></i></p>
+                                        }
+                                    }
+                                    if(decimalPart>0){
+                                        <p class="px-1 fs-6"><i class="fa-solid fa-star-half" style="color:#ffc800;"></i></p>
+                                    }
+                                }
                             </div>
                             <p class="fs-5 textcolor">@review.ReviewDescription</p>
                             

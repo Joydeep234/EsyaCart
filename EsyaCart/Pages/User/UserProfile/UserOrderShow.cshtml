@@ -18,6 +18,7 @@
                 <div class="col">
                     <div class=" d-flex flex-column">
                         <a asp-page="../../User/Productanddetails" asp-route-productID = "@ord.Product_id" class="fs-4 text-decoration-none text-dark">@ord.ProdName</a>
+                        <p>@ord.Product_id</p>
                         <div class="">
                             <span class="fs-6">Order Date : </span><span class="fs-6 text-success">@ord.orderdate</span>
                         </div>
@@ -38,7 +39,7 @@
                             <span class=" fs-4 mx-2">₹ </span><span class=" fs-4 text-success">@ord.TotPrice</span>
                         </div>
                         <div>
-                            <button  class="btn btn-secondary mt-3 ms-5" data-bs-toggle="modal" data-bs-target="#cartModal">Add Reviews</button>
+                            <button  class="btn btn-secondary mt-3 ms-5" data-bs-toggle="modal" data-bs-target="#cartModal-@ord.Product_id">Add Reviews</button>
                         </div>
                         @if(ord.DeliveryStatus==true){
                             <button class="btn btn-danger mt-4 ms-5">Cancel order</button>
@@ -47,11 +48,11 @@
                 </div>
                 </div>
             </div>
-            <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal fade" id="cartModal-@ord.Product_id" tabindex="-1" aria-labelledby="cartModalLabel-@ord.Product_id" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cartModalLabel">Add Product review</h5>
+                <h5 class="modal-title" id="cartModalLabel-@ord.Product_id">Add Product review</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex">
@@ -59,13 +60,14 @@
                     <img src="~/Images/User/Logo.jpeg" alt="Product Image" class="orderimg">
                 </div>
                 <div class="">
-                    <form method="post">
+                    <form method="post" asp-page-handler="EditReviews" asp-route-prodid="@ord.Product_id">
                         <textarea asp-for="@Model.reviewmodel.Description" class="form-control ms-3" style="resize: none;" cols="30" rows="3" placeholder="Write Review..."></textarea>
-                        <input type="number" asp-for="@Model.reviewmodel.Ratings" class="form-control ms-3 mt-2" placeholder="Rating..">
+                        <input type="number" asp-for="@Model.reviewmodel.Ratings" step="0.1" class="form-control ms-3 mt-2" placeholder="Rating.. 0-5" min="0" max="5" required>
                         <span asp-validation-for="@Model.reviewmodel.Ratings"></span>
+                        <p>@ord.Product_id</p>
                         
+                        <button type="submit" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Submit Review</button>
                         
-                        <button type="submit" asp-page-handler="EditReviews" asp-route-prodid="@ord.Product_id" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Submit Review</button>
                     </form>
 
                     </div>

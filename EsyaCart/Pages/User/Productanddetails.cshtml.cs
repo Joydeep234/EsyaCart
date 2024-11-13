@@ -30,12 +30,17 @@ namespace EsyaCart.Pages.User
         public CartModelClass cartModel {get;set;} = new CartModelClass();
         public Cart cart { get; set; } = new Cart();
         public Cart cart2 { get; set; } = new Cart();
-        public async Task OnGet(int productID)
+        public string logoutchecksession {get;set;} = "";
+        public int customerid { get; set; } 
+         public Products products { get; set; } = new Products();
+        public async Task<IActionResult> OnGet(int productID)
         {
             try
             {
-                cart2 = await _context.Cart.Where(c=>c.Customer_Id==1 && c.Product_Id == productID).FirstOrDefaultAsync();
-
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
+                customerid = HttpContext.Session.GetInt32("CustomerId")??0;
+                Console.WriteLine("customerID", customerid);
+                cart2 = await _context.Cart.Where(c=>c.Customer_Id==customerid && c.Product_Id == productID).FirstOrDefaultAsync();
                 ProductInfo = await _context.Products.FirstOrDefaultAsync(p=>p.Product_Id==productID);
                 if(ProductInfo==null)throw new Exception("Did not get Products");
                  ProductReviewDetails = await (from review in _context.Reviews
@@ -56,26 +61,35 @@ namespace EsyaCart.Pages.User
 
                 if (ProductReviewDetails.Count<0)
                     throw new Exception("Review not available for this product");
-
+                return Page();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return Page();
             }
         }   
         public async Task<IActionResult> OnPostAddCartAndBuy(int prodId){
             try
             {
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
+                customerid = HttpContext.Session.GetInt32("CustomerId")??0;
+                if(logoutchecksession == null)return RedirectToPage("../User/UserLogin");
                 cart = await _context.Cart.FirstOrDefaultAsync(p=>p.Product_Id == prodId);
 
                 if(cart!=null){
+                    products = await _context.Products.FirstOrDefaultAsync(p=>p.Product_Id==prodId);
+                    if(products.Quantity<=cart.Quantity){
+                        TempData["datamsg"] = "Maximum Products Available to you";
+                        return Redirect("~/User/Productanddetails?productID=" + prodId);
+                    }
                     cart.Quantity = cart.Quantity + 1;
                     await _context.SaveChangesAsync();
                     return RedirectToPage("../User/UserCart");
                 }
 
                 var newcartModel = new Cart(){
-                    Customer_Id = 1,
+                    Customer_Id = customerid,
                     Product_Id = prodId,
                     Quantity = 1
                 };
@@ -95,16 +109,24 @@ namespace EsyaCart.Pages.User
         public async Task<IActionResult> OnPostAddToCart(int prodId){
             try
             {
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
+                customerid = HttpContext.Session.GetInt32("CustomerId")??0;
+                if(logoutchecksession == null)return RedirectToPage("../User/UserLogin");
                 cart = await _context.Cart.FirstOrDefaultAsync(p=>p.Product_Id == prodId);
 
                 if(cart!=null){
+                    products = await _context.Products.FirstOrDefaultAsync(p=>p.Product_Id==prodId);
+                    if(products.Quantity<=cart.Quantity){
+                        TempData["datamsg"] = "Maximum Products Available to you";
+                        return Redirect("~/User/Productanddetails?productID=" + prodId);
+                    }
                     cart.Quantity = cart.Quantity + 1;
                     await _context.SaveChangesAsync();
                     return Redirect("~/User/Productanddetails?productID=" + prodId);
 
                 }
                var newcartModel = new Cart(){
-                    Customer_Id = 1,
+                    Customer_Id = customerid,
                     Product_Id = prodId,
                     Quantity = 1
                 };
@@ -123,6 +145,9 @@ namespace EsyaCart.Pages.User
         public async Task<IActionResult> OnPostDecreasefromCart(int prodId){
              try
             {
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
+                customerid = HttpContext.Session.GetInt32("CustomerId")??0;
+                if(logoutchecksession == null)return RedirectToPage("../User/UserLogin");
                 cart = await _context.Cart.FirstOrDefaultAsync(p=>p.Product_Id == prodId);
                 
                 if(cart.Quantity==1){
@@ -138,7 +163,7 @@ namespace EsyaCart.Pages.User
 
                 }
                var newcartModel = new Cart(){
-                    Customer_Id = 1,
+                    Customer_Id = customerid,
                     Product_Id = prodId,
                     Quantity = 1
                 };

@@ -25,12 +25,20 @@ namespace EsyaCart.Pages.User
         public Orders Userorder {get;set;}  = new Orders();
         public List<CustomerProductsInCart> cartdata{ get; set; } = new List<CustomerProductsInCart>();
        
+       public string logoutchecksession {get;set;} = "";
+        public int customerid { get; set; } 
         public async Task<IActionResult> OnGet(double TotalPrice)
         {
             try
             {
+                Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+                Response.Headers["Pragma"] = "no-cache";
+                Response.Headers["Expires"] = "0";
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
+                customerid = HttpContext.Session.GetInt32("CustomerId")??0;
+                if(logoutchecksession==null || customerid==0 ||customerid==null)return RedirectToPage("../User/UserLogin");
                 var order = new Orders{
-                    Customer_Id = 1,
+                    Customer_Id = customerid,
                     OrderedDate = DateTime.UtcNow,
                     TotalPrice = TotalPrice
                 };
@@ -45,7 +53,7 @@ namespace EsyaCart.Pages.User
                 cartdata = await (from products in _context.Products
                             join cart in _context.Cart
                             on products.Product_Id equals cart.Product_Id
-                            where cart.Customer_Id==1
+                            where cart.Customer_Id==customerid
                             select new CustomerProductsInCart
                             {
                                 ProductName = products.ProductName,

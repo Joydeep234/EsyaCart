@@ -28,11 +28,19 @@ namespace EsyaCart.Pages.User.UserProfile
         public Account userAcc {get; set;} = new Account();
         public UserDetailsModelClass udmc {get; set;} = new UserDetailsModelClass();
         public int c_id {get;set;} = 0;
+         public string logoutchecksession {get;set;} = "";
+        public int customerid { get; set; } 
         public async Task<IActionResult> OnGet()
         {
            try
            {
-             c_id = 1;
+            Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
+                logoutchecksession = HttpContext.Session.GetString("UserSessionId");
+                customerid = HttpContext.Session.GetInt32("CustomerId")??0;
+                if(logoutchecksession==null || customerid==0 ||customerid==null)return RedirectToPage("../../User/UserLogin");
+             c_id = customerid;
              userdetail = await _context.UserDetails.FirstOrDefaultAsync(u=>u.Accounts_Id==c_id);
              userAcc = await _context.Account.FirstOrDefaultAsync(u=>u.Account_Id==c_id);
 
