@@ -13,7 +13,10 @@
         <th>Landmark</th>
         <th>Vendor RegisterdAt</th>
         <th>Vender Status</th>
+        <th>Status change</th>
         <th>Approval</th>
+        <th>Approval status</th>
+        
         
         </thead>
         <tbody>
@@ -32,14 +35,17 @@
                             <td>@userlist.Landmark</td>
                             <td>@userlist.CreatedAt</td>
                             
-                            <td>@if(userlist.IsActive == true)
+                            <td>
+                            @if(userlist.IsActive == true)
                                 {
+                                  
                                     <span class="badge bg-success">Active</span>
                                 }
                                 else
                                 {
                                     <span class="badge bg-danger">InActive</span>
                                 }
+                               
                             </td>
                             <td>
                                 @if (userlist.IsActive == true)
@@ -53,6 +59,32 @@
                                     <form method="post" asp-page-handler="Update" asp-route-VendorID="@userlist.VendorID" asp-route-status="true">
                                         <button class="btn btn-outline-success">Enable</button>
                                     </form>
+                                }
+                            </td>
+                            <td>
+                                @if(userlist.IsApproved == true)
+                                {
+                                    <span class="badge bg-success">Approved</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Pending</span>
+                                }
+                            </td>
+                            <td>
+                                @if(userlist.IsApproved == true)
+                                {
+                                    <form method="post" asp-page-handler="Approve" asp-route-VendorID="@userlist.VendorID" asp-route-status="false">
+                                        <button class="btn btn-outline-warning">Disapprove</button>
+                                    </form>
+
+                                }
+                                else
+                                {
+                                    <form method="post" asp-page-handler="Approve" asp-route-VendorID="@userlist.VendorID" asp-route-status="true">
+                                        <button class="btn btn-outline-success">Approve</button>
+                                    </form>
+                                    
                                 }
                             </td>
                         </tr>

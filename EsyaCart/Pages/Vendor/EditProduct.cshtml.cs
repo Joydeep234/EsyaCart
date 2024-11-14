@@ -24,20 +24,29 @@ namespace EsyaCart.Pages.Vendor
 
         public async Task<IActionResult> OnGetAsync(int productId)
         {
-            var OldData = await _context.Products.FindAsync(productId);
-            if (OldData != null)
+            var sessionData = HttpContext.Session.GetString("VendorSessionId");
+            if(sessionData != null)
             {
-                editProducts = new EditProductModel
+                var OldData = await _context.Products.FindAsync(productId);
+                if (OldData != null)
                 {
-                    ProductName = OldData.ProductName,
-                    Price = OldData.Price,
-                    Quantity = OldData.Quantity,
-                    Description = OldData.Description
-                };
+                    editProducts = new EditProductModel
+                    {
+                        ProductName = OldData.ProductName,
+                        Price = OldData.Price,
+                        Quantity = OldData.Quantity,
+                        Description = OldData.Description
+                    };
+                }
                 return Page();
             }
-            return Page();
+            else
+            {
+                return RedirectToPage("/Vendor/VendorLogin");
+            }
+                
         }
+
 
         public IActionResult OnPost(int productId)
         {

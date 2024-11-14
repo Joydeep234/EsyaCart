@@ -15,46 +15,49 @@
     <div class="table-responsive w-100 ms-5">
     @if(Model.cartdata.Count > 0)
     {
+        <div class="">
+            <p class="fs-1 text-center mb-5" style="color: #495057;">Your Cart</p>
+        </div>
         double sum = 0;
         <table class="w-100 table table-striped">
 
             <thead class="border-top-0 border-end-0 border-start-0 border-dark border-2">
                 <tr class="my-5">
-                    <th class="text-center">Product</th>
-                    <th class="text-center">Product Name</th>
-                    <th class="text-center">Product Quantity</th>
-                    <th class="text-center"></th>
-                    <th class="text-center"></th>
-                    <th class="text-center">Price</th>
+                    <th class="text-center" style="color: #495057;">Product</th>
+                    <th class="text-center" style="color: #495057;">Product Name</th>
+                    <th class="text-center" style="color: #495057;">Product Quantity</th>
+                    <th class="text-center" style="color: #495057;"></th>
+                    <th class="text-center" style="color: #495057;"></th>
+                    <th class="text-center" style="color: #495057;">Price</th>
                 </tr>
             </thead>
               
         @foreach(var cartdata in Model.cartdata){
-            <tbody>
-                <tr class="border-top-0 border-end-0 border-start-0 border-top-0 border-dark border-1">
-                    <td class="text-center cart-cell">
-                        <img src="~/Uploads/@cartdata.ProductImageUrl" alt="" width="70px" height="70px">
+            <tbody style="border-spacing: 0 10px; background-color: #ffffff !important;">
+                <tr class="border-top-0 border-end-0 border-start-0 border-top-0 border-dark border-1 table-row-spacing">
+                    <td class="text-center cart-cell" style="color: #495057;">
+                        <img src="~/Uploads/@cartdata.ProductImageUrl" alt="" width="100px" height="100px">
                     </td>
-                    <td class="text-center cart-cell fs-4">@cartdata.ProductName</td>
-                    <td class="text-center cart-cell fs-4">@cartdata.ProductQuantity</td>
-                    <td class="text-center cart-cell fs-4">
+                    <td class="text-center cart-cell fs-4" style="color: #495057;">@cartdata.ProductName</td>
+                    <td class="text-center cart-cell fs-4" style="color: #495057;">@cartdata.ProductQuantity</td>
+                    <td class="text-center cart-cell fs-4" style="color: #495057;">
                         
                             <div class="d-flex justify-content-center align-items-center cartbtncontainer2">
                                 <form method="post" class="ms-2">
-                                    <button type="submit" asp-page-handler="DecreasefromCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-danger fs-3 px-3">-</button>
+                                    <button type="submit" asp-page-handler="DecreasefromCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-danger fs-5 px-3">-</button>
                                 </form>
                                 <h2 class="text-center mx-3">@cartdata.ProductQuantity.ToString()</h2>
                                 <form method="post" class="me-2">
-                                    <button type="submit" asp-page-handler="AddToCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-primary fs-3">+</button>
+                                    <button type="submit" asp-page-handler="AddToCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-primary fs-5">+</button>
                                 </form>
                             </div>
                             <td>
                                 <form method="post" class="me-2">
-                                    <button type="submit" asp-page-handler="RemovefromCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-danger fs-4"><i class="fa-regular fa-trash-can"></i></button>
+                                    <button type="submit" asp-page-handler="RemovefromCart" asp-route-prodId="@cartdata.Product_ID" class="btn btn-danger fs-5"><i class="fa-regular fa-trash-can"></i></button>
                                 </form>
                             </td>
                         </td>
-                        <td class="text-center cart-cell fs-4">@(cartdata.ProductPrice * cartdata.ProductQuantity)</td>
+                        <td class="text-center cart-cell fs-4" style="color: #008728;">₹ @(cartdata.ProductPrice * cartdata.ProductQuantity)</td>
                         <p style="display: none;">@(sum += (cartdata.ProductPrice * cartdata.ProductQuantity)) @(totalsum = sum)</p>
                     </tr>
                 </tbody>
@@ -62,14 +65,22 @@
 
             <div class="carttotal">
                 <button class="btn form-control btncolor btn-secondary" data-bs-toggle="modal" data-bs-target="#cartModal">
-                    <span class="mx-3 fs-3">Your Total: @sum</span><span class="mx-3 fs-3">Checkout</span>
+                    <span class="mx-3 fs-3">Your Total:₹ @sum</span><span class="mx-3 fs-3">Checkout</span>
                 </button>
             </div>
         </table>
     }
     else
     {
-        <div></div>
+        <div style="color: #56595b; display: flex;align-items: center; justify-content: center; height:100vh">
+            <div class="">
+                <h1><i class="fa-solid fa-cart-shopping fs-4 m-3"></i> Your Cart Is Empty</h1>
+                <div class="btn btn-secondary py-2 px-4" style="display: flex;align-items: center; justify-content: center;">
+                <a asp-page="../User/Dashboard" class="text-decoration-none text-white">Go To Shopping</a>
+                </div>
+            </div>
+        </div>
+        
     }
 </div>
 

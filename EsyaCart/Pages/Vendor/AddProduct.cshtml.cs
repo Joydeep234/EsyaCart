@@ -12,6 +12,7 @@ namespace EsyaCart.Pages.Vendor
     {
 
         public bool approval;
+        public int sellerId; // vendorID in Db context
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _environment;
 
@@ -26,28 +27,43 @@ namespace EsyaCart.Pages.Vendor
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == 4).FirstOrDefault();
-            approval = vendorData.IsApproved;
+            var sessionData = HttpContext.Session.GetString("VendorSessionId");
 
-            ViewData["CategoryList"] = await _context.Catagory
-                .Select(c => new SelectListItem
-                {
-                    Value = c.Catagory_Id.ToString(),
-                    Text = c.CatagoryName.ToString()
-                }).ToListAsync();
+            if(sessionData != null)
+            {
+                int vendorSessionId = Convert.ToInt32(sessionData);
+                var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == vendorSessionId).FirstOrDefault();
+                approval = vendorData.IsApproved;
+                sellerId = vendorData.VendorID;
 
-            return Page();
+                ViewData["CategoryList"] = await _context.Catagory
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.Catagory_Id.ToString(),
+                        Text = c.CatagoryName.ToString()
+                    }).ToListAsync();
+
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("/Vendor/VendorLogin");
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            int vendorSessionId = Convert.ToInt32(HttpContext.Session.GetString("VendorSessionId"));
+            var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == vendorSessionId).FirstOrDefault();
+            approval = vendorData.IsApproved;
+            sellerId = vendorData.VendorID;
+
             ViewData["CategoryList"] = await _context.Catagory
             .Select(c => new SelectListItem
             {
                Value = c.Catagory_Id.ToString(),
                Text = c.CatagoryName
             }).ToListAsync();
-
 
             if (ModelState.IsValid)
             {
@@ -64,7 +80,7 @@ namespace EsyaCart.Pages.Vendor
                 Products product = new Products
                 {  
                     Category_Id = selectedCategoryId,
-                    Vendor_Id = 1,
+                    Vendor_Id = sellerId,
                     ProductName = addProductModel.ProductName,
                     Price = addProductModel.Price,
                     Quantity = addProductModel.Quantity,

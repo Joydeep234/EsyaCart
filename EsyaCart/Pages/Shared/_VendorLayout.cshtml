@@ -8,53 +8,70 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Vendor.css" asp-append-version="true" />
-    @* <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true"/> *@
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/Vendor.css" asp-append-version="true" /><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" asp-append-version="true" />
 
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" asp-append-version="true" />
 
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid vendor___layout">
         <div class="row flex-nowrap">
-            <div class="col-2 col-md-3 bg-light col-xl-2 px-sm-2 px-0 position-fixed">
+            <div class="col-2 col-md-3 col-xl-2 px-sm-2 px-0 position-fixed sidebar">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                        <img class="img-fluid mb-2 mx-auto" loading="lazy" src="~/Images/Seller/esyacart-removebg-preview.png" width="110" height="30" alt="BootstrapBrain Logo">
                     </a>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
-                            <div>
-                                <a asp-page="/Vendor/VendorHome" class="nav-link align-middle px-0">
-                                    <span class="ms-1 d-none d-sm-inline">Home</span>
-                                </a>
-                            </div>
+                            <a asp-page="/Vendor/VendorHome" class="nav-link">  
+                                Home
+                            </a>
                         </li>
                         <li>
-                            <div>
-                                <a asp-page="/Vendor/AddProduct" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                    <span class="ms-1 d-none d-sm-inline">Add Products</span>
-                                </a>
-                            </div>
+                            <a asp-page="/Vendor/AddProduct" class="nav-link link-dark">
+                                Add Product
+                            </a>
                         </li>
                         <li>
-                            <div>
-                                <a asp-page="/Vendor/ViewProducts" class="nav-link px-0 align-middle">
-                                    <span class="ms-1 d-none d-sm-inline">View Products</span>
-                                </a>
-                            </div>  
+                            <a asp-page="/Vendor/ViewProducts" class="nav-link link-dark">
+                                View Products
+                            </a>
                         </li>
                     </ul>
-                    <hr>  
+                    <hr> 
+                    <div>
+                        <button class="btn mb-5 signout__btn" id="logoutButton">
+                            Sign out
+                        </button>
+                        
+                    </div>
                 </div>
             </div>
             <div class="col-10 py-3 position-relative overflow-hidden overflow-hidden" style="left: 260px">
-                @await Html.PartialAsync("_Notification");
+                @await Html.PartialAsync("_Notification")
                 @RenderBody()
             </div>
         </div>
 	</div>
+    <script>
+        function clearSession() {
+            fetch('/Vendor/SessionClearer?handler=SessionClearer', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Session cleared successfully!");
+                    window.location.href = '/User/Dashboard';
+                } else {
+                    console.error("Failed to clear session.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+        document.getElementById("logoutButton").addEventListener("click", clearSession);
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </body>
 </html>

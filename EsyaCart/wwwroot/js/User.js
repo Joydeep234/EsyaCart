@@ -8,16 +8,15 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Carousel navigation
     prevBtn.addEventListener('click', () => {
-        carousel.scrollBy({ left: 320, behavior: 'smooth' });
+        carousel.scrollBy({ left: -315, behavior: 'smooth' });
     });
     nextBtn.addEventListener('click', () => {
-        carousel.scrollBy({ left: -315, behavior: 'smooth' });
+        carousel.scrollBy({ left: 320, behavior: 'smooth' });
     });
 
     
     productItems.forEach((divhoveraction, index) => {
-        divhoveraction.addEventListener('mouseover', () => {
-            divhoveraction.style.transform = 'translateX(0px) translateY(0px) translateZ(10px) scaleX(1) scaleY(1) scaleZ(1)'; 
+        divhoveraction.addEventListener('mouseover', () => { 
             divhoveraction.style.boxShadow = '0px 0px 8px #aaa6a67d';
             AddcartBtns[index].style.display = 'block'; 
             BuyNowBtns[index].style.display = 'block';
@@ -31,4 +30,5 @@ document.addEventListener('DOMContentLoaded', function () {
             BuyNowBtns[index].style.display = 'none'; 
         });
     });
+        
 });

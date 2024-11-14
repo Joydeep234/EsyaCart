@@ -13,6 +13,7 @@ namespace EsyaCart.Pages.Vendor
     {
 
         public bool approval;
+        public int sellerId;
         private readonly AppDbContext _context;
 
         public ViewProducts(AppDbContext context)
@@ -25,35 +26,49 @@ namespace EsyaCart.Pages.Vendor
         public List<ProductReviews> productReviews { get; set; } = new List<ProductReviews>();
 		public async Task<IActionResult> OnGetAsync()
         {
-			var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == 4).FirstOrDefault();
-			approval = vendorData.IsApproved;
+            var sessionData = HttpContext.Session.GetString("VendorSessionId");
+            if(sessionData != null)
+            {
+                int vendorSessionId = Convert.ToInt32(sessionData);
+                var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == vendorSessionId).FirstOrDefault();
+                approval = vendorData.IsApproved;
+                sellerId = vendorData.VendorID;
 
-            productReviews = (from product in _context.Products
-                              join review in _context.Reviews
-                              on product.Product_Id equals review.Product_Id into reviewGroup
-                              from review in reviewGroup.DefaultIfEmpty()  // Left join
-                              where product.Vendor_Id == 1 // 9 = sessions id of vendor
-                              select new ProductReviews
-                              {
-                                  Product_Id = product.Product_Id,
-                                  ProductName = product.ProductName,
-                                  Price = product.Price,
-                                  Quantity = product.Quantity,
-                                  IsActive = product.IsActive,
-                                  Description = product.Description,
-                                  ImageUrl = product.ImageUrl,
-                                  Ratings = review == null ? 0 : review.Ratings  // Default to 0 if no review
-                              }).ToList();
+                productReviews = (from product in _context.Products
+                                  join review in _context.Reviews
+                                  on product.Product_Id equals review.Product_Id into reviewGroup
+                                  where (product.Vendor_Id == sellerId)
+                                  select new ProductReviews
+                                  {
+                                      Vendor_Id = product.Vendor_Id,
+                                      Product_Id = product.Product_Id,
+                                      ProductName = product.ProductName,
+                                      Price = product.Price,
+                                      Quantity = product.Quantity,
+                                      IsActive = product.IsActive,
+                                      Description = product.Description,
+                                      ImageUrl = product.ImageUrl,
+                                      Ratings = reviewGroup.Any() ? reviewGroup.Average(r => r.Ratings) : 0  // Average rating if there are reviews
+                                  }).ToList();
 
-            categoryList = await _context.Catagory.ToListAsync();
-            return Page();
+                categoryList = await _context.Catagory.ToListAsync();
+                return Page();
+
+            }
+            else
+            {
+                return RedirectToPage("/Vendor/VendorLogin");
+            }
         }
-
 
         public async Task<IActionResult> OnPostCategoryAsync(int categoryId)
         {
-            var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == 4).FirstOrDefault();
+
+            int vendorSessionId = Convert.ToInt32(HttpContext.Session.GetString("VendorSessionId"));
+
+            var vendorData = _context.VendorDetails.Where(p => p.Accounts_Id == vendorSessionId).FirstOrDefault();
             approval = vendorData.IsApproved;
+            sellerId = vendorData.VendorID;
 
             if (categoryId == 0)
             {
@@ -66,7 +81,7 @@ namespace EsyaCart.Pages.Vendor
                 productReviews = (from product in _context.Products
                                       join review in _context.Reviews
                                       on product.Product_Id equals review.Product_Id into reviewGroup
-                                      where (product.Category_Id == categoryId && product.Vendor_Id == 1)
+                                      where (product.Category_Id == categoryId && product.Vendor_Id == sellerId)
                                       select new ProductReviews
                                       {
                                           Vendor_Id = product.Vendor_Id,
@@ -103,6 +118,21 @@ namespace EsyaCart.Pages.Vendor
             else
             {
             return Page();
+            }
+        }
+
+        public async Task<IActionResult> OnPostDisableAsync(int productId)
+        {
+            var currentProduct = await _context.Products.FindAsync(productId);
+            if(currentProduct != null && currentProduct.IsActive == true)
+            {
+                currentProduct.IsActive = false;
+                await _context.SaveChangesAsync();
+                return RedirectToPage();
+            }
+            else
+            {
+                return Page();
             }
         }
     }

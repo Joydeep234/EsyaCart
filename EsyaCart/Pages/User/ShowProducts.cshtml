@@ -4,19 +4,49 @@
 @{
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<div class="">
+<div class="miancontainerShowproducts">
+    <aside class="asideparent">
+        <p class="text-center fs-4">Filters <i class="fa-solid fa-filter"></i></p>
+        <hr>
+        <div class="">
+            <div class="d-flex align-items-start justify-content-start">
+        <span class="fs-5 ms-3">Catagory</span>
+     </div>
+            @if(Model.catagory.CatagoryName!=null){
+                <p class="ms-5 mt-2">@Model.catagory.CatagoryName</p>
+            }
+        </div>
+        <hr style="padding: -20px;">
+        <div class="asidebarset">
+        <form method="post" class="d-flex flex-column align-items-center justify-content-center" asp-page-handler="OnFilterRange" asp-route-catid = "@Model.cat_id">
+     <div class="d-flex align-items-start justify-content-start w-100">
+        <span class="fs-5 mb-2 ms-3">Price</span>
+     </div>
+     <div class="">
+        
+        <input type="range" asp-for="slidermodel.SelectedPrice" id="lengthSlider" class="form-control" min="0" max="@Model.maxprice" value="200" style="width: 250px;">
+        <div class="d-flex justify-content-center">
+            <p id="showrange" class="px-5 btn btn-secondary m-2">0</p>
+        </div>
+     </div>
+     <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+    </div>
+    <hr>
+    </aside>
+    <div class="miancontainerShowproductschild">
+    
     @if (Model.productsEntity.Count > 0)
     {
         @foreach (var product in Model.productsEntity)
         {
-            <div class="row p-4 border hoverlink addingshadow" >
+            
+            <div class="row p-4 border hoverlink rounded addingshadow" id="products_maindiv">
                 <a asp-page="Productanddetails" asp-route-productID="@product.Product_Id" class="row text-dark text-decoration-none">
                     <div class="col-3">
-                    <img src="~/Uploads/@product.ImageUrl" alt="" width="250px" height="150px">
+                    <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "~/Uploads/default.jpg" : $"~/Uploads/{product.ImageUrl}")" alt="" width="250px" height="150px">
                     </div>
-                    <div class="col-5">
+                    <div class="col-5 description_div">
                         <div class="hoverlink">
                             <h3>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</h3>
                         </div>
@@ -25,8 +55,13 @@
                         </div>
                     </div>
                     <div class="col-3">
-                        <div class="othertags">
-                            <p class="fs-3 fw-midium text-success">@product.Price</p>
+                        <div class="settingpriceandcart">
+                            <div class="othertags_price">
+                            <p class="fs-3 fw-midium text-success">₹ @product.Price</p>
+                            </div>
+                            <form method="post" class=" d-flex" style="margin-top:40px;">
+                                <button class="Addcart-btn2 mx-2 fs-3" asp-page-handler="AddCartAndBuy" asp-route-prodId="@product.Product_Id" style="border: none; background-color: #E9ECEF; display: none;" ><i class="fa-solid fa-cart-shopping"></i></button>
+                            </form>
                         </div>
                     </div>
                 </a>
@@ -38,3 +73,33 @@
         <h1>Products Not Available</h1>
     }
 </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () 
+    {
+        const lengthSlider = document.querySelector('#lengthSlider');
+            const showrange = document.querySelector('#showrange');
+            const addingshadow = document.querySelectorAll('#products_maindiv');
+            const addCartButtons = document.querySelectorAll('.Addcart-btn2');
+            
+           if (lengthSlider && showrange) {
+            
+            lengthSlider.addEventListener('input', () => {
+                showrange.textContent = lengthSlider.value;
+                console.log("Slider value changed to:", lengthSlider.value);
+            });
+        } else {
+            console.error("Slider or range element not found");
+        }
+            addingshadow.forEach((divhoveraction, index) => {
+                divhoveraction.addEventListener('mouseover', () => {                   
+                        addCartButtons[index].style.display = 'block';
+                });
+
+                divhoveraction.addEventListener('mouseout', () => {                    
+                        addCartButtons[index].style.display = 'none';
+                });
+            });
+    });
+</script>
+

@@ -114,14 +114,32 @@
     outline: none;
 }
 .hoverlink{
-    background-color: rgb(255, 255, 255);
+  color: #6C757D;
+    background-color: #E9ECEF;
+    margin: 1rem;
+}
+.hoverlink:hover{
+  transform: scaleX(1.01) scaleY(1.01) ;
+}
+.description_div{
+  display: flex;
+  flex-direction: column;
 }
 .addingshadow{
+  width: 100%;
+    margin: 15px;
     border-radius: 5px;
     box-shadow: 0px 0px 7px rgba(72, 72, 72, 0.827);
 }
 .hoverlink:hover h3{
     color: #157deb;
+}
+.othertags_price{
+  text-align: end;
+}
+.othertags{
+  text-align: justify;
+  margin-left: 15px;
 }
 .othertags:hover{
     color:black
@@ -321,16 +339,15 @@ a.navbar-brand {
     right:35%;
 }
 .btncolor {
-    background-color: #ff6f61;
+    background-color: #495057;
     color: white;
-    transition: background-color 0.1s ease-in-out, padding 0.2s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .btncolor:hover {
-    padding: 1rem;
-    background-color: #ff3624;
+    transform: scaleX(1.05) scaleY(1.05);
+    background-color: #ADB5BD;
     box-shadow: 0px 0px 7px rgba(71, 71, 71, 0.951);
-    color: rgb(99, 93, 93);
+    color: rgb(255, 255, 255);
 }
 .classempty{
     width: 100%;
@@ -511,7 +528,7 @@ aside {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 105px 100px;
+    padding: 15px;
     transition: transform 0.3s ease;
 }
 
@@ -590,4 +607,40 @@ aside {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.miancontainerShowproducts{
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  grid-template-areas:
+  'asideparent miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild'
+  'asideparent miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild'
+  'asideparent miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild'
+  'asideparent miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild'
+  'asideparent miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild miancontainerShowproductschild';
+  gap: 20px;
+}
+.miancontainerShowproductschild{
+  width: 100%;
+  grid-area:miancontainerShowproductschild;
+  /* border: 1px solid red; */
+}
+.asideparent{
+  margin-top: -20px;
+  background-color: #ADB5BD;
+  width: 300px;
+  grid-area:asideparent ;
+  height: 100vh;
+  box-shadow: 1px 0px 7px rgba(86, 86, 86, 0.625);
+}
+.settingpriceandcart{
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
+}
+.Addcart-btn2{
+  color: #495057;
+}
+.Addcart-btn2:hover{
+  color: #ADB5BD;
 }

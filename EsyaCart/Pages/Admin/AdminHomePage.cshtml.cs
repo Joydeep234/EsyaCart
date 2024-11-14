@@ -24,43 +24,61 @@ namespace EsyaCart.Pages.Admin
         public List<double> TotalSales { get; set; } = new List<double>();
         public List<int> GroupedOrderCount { get; set; } = new List<int>();
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGet()
         {
-            UserCount = await _context.UserDetails.CountAsync();
-            VenderCount = await _context.VendorDetails.CountAsync();
-            OrderCount = await _context.Orders.CountAsync();
-
-            var salesData = await _context.Orders
-                .Where(o => o.OrderedDate >= DateTime.Now.AddDays(-7))
-                .ToListAsync();
-
-            var groupedSalesData = salesData
-                .GroupBy(o => o.OrderedDate.DayOfWeek)
-                .Select(g => new
-                {
-                    Day = g.Key.ToString(),
-                    TotalSales = g.Sum(o => o.TotalPrice)
-                })
-                .ToList();
-
-            var groupedOrders = salesData
-                .GroupBy(o => o.OrderedDate.DayOfWeek)
-                .Select(g => new
-                {
-                    Day = g.Key.ToString(),
-                    TotalOrderCount = g.Count()
-                })
-                .ToList();
-
-            Days = Enum.GetNames(typeof(DayOfWeek)).ToList();
-            foreach (var day in Days)
+            Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
+            var sessionId = HttpContext.Session.GetString("AdminSessionId");
+            Console.WriteLine($"AdminHome==>{sessionId}");
+            if (sessionId == null)
             {
-                var sales = groupedSalesData.FirstOrDefault(s => s.Day == day)?.TotalSales ?? 0;
-                TotalSales.Add(sales);
-
-                var orders = groupedOrders.FirstOrDefault(s => s.Day == day)?.TotalOrderCount ?? 0;
-                GroupedOrderCount.Add(orders);
+                return RedirectToPage("/Admin/AdminLogin");
             }
+            else{
+                UserCount = await _context.UserDetails.CountAsync();
+                VenderCount = await _context.VendorDetails.CountAsync();
+                OrderCount = await _context.Orders.CountAsync();
+
+                var salesData = await _context.Orders
+                    .Where(o => o.OrderedDate >= DateTime.Now.AddDays(-7))
+                    .ToListAsync();
+
+                var groupedSalesData = salesData
+                    .GroupBy(o => o.OrderedDate.DayOfWeek)
+                    .Select(g => new
+                    {
+                        Day = g.Key.ToString(),
+                        TotalSales = g.Sum(o => o.TotalPrice)
+                    })
+                    .ToList();
+
+                var groupedOrders = salesData
+                    .GroupBy(o => o.OrderedDate.DayOfWeek)
+                    .Select(g => new
+                    {
+                        Day = g.Key.ToString(),
+                        TotalOrderCount = g.Count()
+                    })
+                    .ToList();
+
+                Days = Enum.GetNames(typeof(DayOfWeek)).ToList();
+                foreach (var day in Days)
+                {
+                    var sales = groupedSalesData.FirstOrDefault(s => s.Day == day)?.TotalSales ?? 0;
+                    TotalSales.Add(sales);
+
+                    var orders = groupedOrders.FirstOrDefault(s => s.Day == day)?.TotalOrderCount ?? 0;
+                    GroupedOrderCount.Add(orders);
+                }
+                return Page();
+            }
+           
+
+
+
+
+           
         }
     }
 }

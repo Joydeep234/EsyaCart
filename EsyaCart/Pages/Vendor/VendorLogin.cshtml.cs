@@ -19,8 +19,13 @@ namespace EsyaCart.Pages.Vendor
         [BindProperty]
         public VendorLoginModel vendorLoginModel { get; set; }
 
-        public void OnGet()
-        {
+        public IActionResult OnGet()
+        {  
+            var sessionData = HttpContext.Session.GetString("VendorSessionId");
+            if (sessionData != null) {
+                return RedirectToPage("/Vendor/VendorHome");
+            }
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -32,9 +37,13 @@ namespace EsyaCart.Pages.Vendor
 
                 if (validUser != null)
                 {
-
                     TempData["Success"] = "User " + validUser.Email + " Logedin SUccessfull";
                     Console.WriteLine(TempData["Success"]);
+
+                    var accountId = validUser.Account_Id;
+                    
+                    HttpContext.Session.SetString("VendorSessionId", accountId.ToString());
+
                     return RedirectToPage("/Vendor/VendorHome");
                 }
                 else

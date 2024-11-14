@@ -30,7 +30,7 @@
               <video src="~/vedio/User/vedio3.mp4" class="d-block w-100 setheight" style="object-fit: cover;" autoplay loop muted disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"></video>
                   <div class="applyflex">
                       <p class="" style="color: white;">Galaxy Ultra Watch </p>
-                      <p class="fs-4" style="color: white;">Starting ₹2999/mo* (18 mo. No Cost EMI)</p>                  </div>
+                      <p class="fs-4" style="color: white;">Starting ₹2999/mo* (18 mo. No Cost EMI)</p>       </div>
                   </div>
             <div class="carousel-item" data-bs-interval="5000">
               <video src="~/vedio/User/vedio4.mp4" class="d-block w-100 setheight" style="object-fit: cover;" autoplay loop muted disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback"></video>
@@ -71,7 +71,7 @@
                 {
                     <div class="product-item" style="background-color: #E9ECEF;">
                         <a asp-page="ShowProducts" asp-route-productcatagoryID="@product.Category_Id" class="text-dark text-decoration-none">
-                            <img src="~/Uploads/@product.ImageUrl" alt="@product.ProductName" />
+                                    <img src="~/Uploads/@product.ImageUrl" alt="@product.ProductName" style="height : 244px; width : 257px; object-fit: contain" />
                             <h5>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</h5>
                             <p class="text-success">₹@string.Format("{0:N2}", product.Price)</p>
                             <form method="post" class=" d-flex">

@@ -1,6 +1,191 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+:root {
+    --bg-page: #F8F9FA;
+    --bg-card: #E9ECEF;
+    --dark: #343A40;
+    --max-dark: #212529;
+}
+body {
+    font-family: "poppins";
+    background-color: var(--bg-page);
 }
 
-.left-nav {
-    background-color: #034694;
+vendor___layout {
+    background-color: var(--bg-page);
 }
+/* Login Page*/
+.login__card {
+    background-color: var(--bg-card);
+}
+
+.login__title {
+    font-weight: 800;
+    line-height: 1.5;
+    font-size: 3rem;
+    color: var(--dark);
+}
+
+.login__tagline{
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.login__card__title{
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+.login__btn {
+    background-color: var(--dark);
+    color: white;
+    padding-block: 8px;
+}
+
+.login__btn:hover {
+    color: white;
+    background-color: var(--max-dark);
+    padding-block: 8px;
+}
+
+.login__card__title {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.form-control {
+    background-color: var(--bg-page);
+}
+
+.form-label{
+    font-weight: 500;
+}
+
+.text-secondary{
+    font-size: 1rem;
+    color: var(--dark);
+}
+
+.link-primary {
+    color: var(--max-dark);
+}
+
+.link-primary:hover {
+        color: #495057;
+ }
+
+.form-control:focus {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border: var(--dark);
+}
+
+.form-control::placeholder{
+   color: var(--dark);
+   opacity: 0.7;
+}
+
+/*signup form */
+.signup__h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+
+.signup__btn {
+    background-color: var(--dark);
+    color: white;
+    padding-block: 8px;
+}
+
+.signup__btn:hover {
+        color: white;
+        background-color: var(--max-dark);
+        padding-block: 8px;
+}
+
+/*Sidebar */
+
+.sidebar {
+    background-color: #ADB5BD;
+}
+
+.nav-link{
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+    .nav-link:hover {
+        color: var(--dark);
+        font-weight: 500;
+        font-size: 1rem;
+        background-color: var(--bg-card);
+    }
+
+
+/*    add more details */
+.addDetails__card{
+    background-color: var(--bg-page);
+}
+
+.vedndor__btn {
+    background-color: var(--max-dark);
+    color: white;
+    padding-block: 8px;
+    padding-inline: 195px;
+}
+
+.vendor__btn:hover {
+    color: white;
+    background-color: #6C757D;
+    padding-block: 195px;
+}
+
+/*add products files */
+
+.addProduct__card{
+    background-color: var(--bg-page);
+    border: none;
+}
+
+/*product cards */
+
+.product__card {
+    background-color: white;
+}
+
+.product__title{
+    font-weight: 500;
+}
+/*=================================================*/
+.signout__btn {
+    background-color: var(--dark);
+    color: white;
+    padding-inline: 50px
+}
+
+    .signout__btn:hover {
+        background-color: var(--max-dark);
+        color: white;
+        padding-inline: 50px
+    }
+
+/*edit products */
+.addDetails__card{
+    background-color: var(--bg-page);
+    border: none;
+}
+
+.edit__btn {
+    color: white;
+    background-color: #6C757D;
+}
+
+.edit__btn:hover{
+    color: white;
+    background-color: var(--max-dark);
+}
+
