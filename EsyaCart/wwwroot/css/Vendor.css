@@ -22,7 +22,7 @@ vendor___layout {
 
 .login__title {
     font-weight: 800;
-    line-height: 1.5;
+    line-height: 1.2;
     font-size: 3rem;
     color: var(--dark);
 }
@@ -189,3 +189,56 @@ vendor___layout {
     background-color: var(--max-dark);
 }
 
+.editProduct__btn {
+    color: white;
+    background-color: #6C757D;
+    padding-inline: 205px;
+    margin-top: 20px;
+}
+
+.editProduct__btn:hover {
+    color: white;
+    background-color: var(--max-dark);
+
+}
+
+
+/*toast messages */
+
+/*.toast-success {
+    background-color: #262626 !important;*/ /* Green */
+/*}
+
+.toast-error {
+    background-color: #262626 !important;*/ /* Red */
+/*}
+
+.toast-info {
+    background-color: #262626 !important;*/ /* Blue */
+/*}
+
+.toast-warning {
+    background-color: #262626 !important;*/ /* Amber */
+/*}*/
+
+/* Customize text color, font, and size */
+.toast-message {
+    margin-left: 10px;
+    color: white;
+    font-family: "poppins";
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Add shadow or rounded corners */
+.toast {
+    background-color: #262626 !important;
+    opacity : 1;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    border-radius: 10px;
+    padding-inline: 20px;
+    padding-block: 7px;
+    width: 350px;
+    /*    width: auto !important;*/
+    /* Optional: Limit the max width for larger screens */
+}

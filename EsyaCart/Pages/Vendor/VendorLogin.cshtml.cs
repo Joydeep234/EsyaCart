@@ -44,7 +44,10 @@ namespace EsyaCart.Pages.Vendor
                     
                     HttpContext.Session.SetString("VendorSessionId", accountId.ToString());
 
-                    return RedirectToPage("/Vendor/VendorHome");
+                    TempData["ToastMessage"] = "Login Successfull!";
+                    TempData["ToastType"] = "success";
+
+                    return RedirectToPage("/Vendor/ViewAnalytics");
                 }
                 else
                 {

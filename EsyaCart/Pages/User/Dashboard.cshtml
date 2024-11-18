@@ -69,10 +69,10 @@
             {
                 @foreach (var product in Model.productsEntity)
                 {
-                    <div class="product-item" style="background-color: #E9ECEF;">
+                        <div class="product-item" style="background-color: #E9ECEF; height: 400px;">
                         <a asp-page="ShowProducts" asp-route-productcatagoryID="@product.Category_Id" class="text-dark text-decoration-none">
-                                    <img src="~/Uploads/@product.ImageUrl" alt="@product.ProductName" style="height : 244px; width : 257px; object-fit: contain" />
-                            <h5>@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</h5>
+                            <img src="~/Uploads/@product.ImageUrl" alt="@product.ProductName" style="height : 244px; width : 257px; object-fit: contain" />
+                            <h5 style="white-space: nowrap;">@CultureInfo.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</h5>
                             <p class="text-success">₹@string.Format("{0:N2}", product.Price)</p>
                             <form method="post" class=" d-flex">
                               <button class="Addcart-btn mx-2 text-white" asp-page-handler="AddCartAndBuy" asp-route-prodId="@product.Product_Id" style="border: none; display:none;" ><i class="fa-solid fa-cart-shopping"></i></button>
@@ -90,3 +90,4 @@
         <button class="carousel-btn next-btn">&#10095;</button>
     </div>
 </div>
+

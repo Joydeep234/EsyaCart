@@ -38,13 +38,19 @@
                                                     int num = Convert.ToInt32(product.Ratings);
                                                     if(num == 0)
                                                     {
-                                                        <span class="text-sm">No Ratings/Reviews are added</span>
+                                                        for(int i = 0; i < 5; i++){
+                                                            <i class="fa-regular fa-star text-warning mr-1"></i>
+                                                        }
+                                                        <span class="text-sm">No Ratings</span>
                                                     }
                                                     else
                                                     {
                                                         for (int i = 0; i < num; i++)
                                                         {
                                                             <i class="star fas fa-star text-warning mr-1"></i>
+                                                        }
+                                                        for(int i = 0; i < 5 - num; i++){
+                                                            <i class="fa-regular fa-star text-warning"></i>
                                                         }
                                                     }
                                                     

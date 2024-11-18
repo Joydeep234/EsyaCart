@@ -48,12 +48,11 @@ namespace EsyaCart.Pages.Vendor
                                       IsActive = product.IsActive,
                                       Description = product.Description,
                                       ImageUrl = product.ImageUrl,
-                                      Ratings = reviewGroup.Any() ? reviewGroup.Average(r => r.Ratings) : 0  // Average rating if there are reviews
+                                      Ratings = reviewGroup.Any() ? reviewGroup.Average(r => r.Ratings) : 0  
                                   }).ToList();
 
                 categoryList = await _context.Catagory.ToListAsync();
                 return Page();
-
             }
             else
             {
@@ -113,11 +112,15 @@ namespace EsyaCart.Pages.Vendor
             {
                 currentProduct.IsActive = true;
                 await _context.SaveChangesAsync();
+                TempData["ToastMessage"] = "Product is live now!";
+                TempData["ToastType"] = "info";
                 return RedirectToPage();
             }
             else
             {
-            return Page();
+                TempData["ToastMessage"] ="Error while fetching product data";
+                TempData["ToastType"] = "error";
+                return Page();
             }
         }
 
@@ -128,6 +131,9 @@ namespace EsyaCart.Pages.Vendor
             {
                 currentProduct.IsActive = false;
                 await _context.SaveChangesAsync();
+
+                TempData["ToastMessage"] = "Product Disabled for selling!";
+                TempData["ToastType"] = "warning";
                 return RedirectToPage();
             }
             else

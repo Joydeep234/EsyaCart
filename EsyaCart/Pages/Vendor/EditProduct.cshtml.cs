@@ -47,7 +47,6 @@ namespace EsyaCart.Pages.Vendor
                 
         }
 
-
         public IActionResult OnPost(int productId)
         {
             var UpdatedData = _context.Products.Find(productId);
@@ -61,15 +60,13 @@ namespace EsyaCart.Pages.Vendor
 
                 _context.SaveChanges();
 
-                TempData["ToastrMessage"] = "Product details updated successfully!";
-                TempData["ToastrType"] = "success"; // Options: "success", "error", "info", "warning"
+                TempData["ToastMessage"] = "Product saved successfully!";
+                TempData["ToastType"] = "success";
 
                 return RedirectToPage("/Vendor/ViewProducts");
             }
-            else
-            {
-                return Page();
-            }
+            
+            return Page();
         }
     }
 }

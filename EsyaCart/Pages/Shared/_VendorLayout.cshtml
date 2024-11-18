@@ -9,12 +9,15 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Vendor.css" asp-append-version="true" /><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" asp-append-version="true" />
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 <body>
+   
     <div class="container-fluid vendor___layout">
         <div class="row flex-nowrap">
             <div class="col-2 col-md-3 col-xl-2 px-sm-2 px-0 position-fixed sidebar">
@@ -23,9 +26,14 @@
                         <img class="img-fluid mb-2 mx-auto" loading="lazy" src="~/Images/Seller/esyacart-removebg-preview.png" width="110" height="30" alt="BootstrapBrain Logo">
                     </a>
                     <ul class="nav nav-pills flex-column mb-auto">
+                        <li>
+                            <a asp-page="/Vendor/ViewAnalytics" class="nav-link link-dark">
+                                Dashboard
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a asp-page="/Vendor/VendorHome" class="nav-link">  
-                                Home
+                                Profile
                             </a>
                         </li>
                         <li>
@@ -38,18 +46,23 @@
                                 View Products
                             </a>
                         </li>
+                        <li>
+                            <a asp-page="/Vendor/ViewOrders" class="nav-link link-dark">
+                                View Orders
+                            </a>
+                        </li>
+                      
                     </ul>
                     <hr> 
                     <div>
                         <button class="btn mb-5 signout__btn" id="logoutButton">
                             Sign out
                         </button>
-                        
                     </div>
                 </div>
             </div>
             <div class="col-10 py-3 position-relative overflow-hidden overflow-hidden" style="left: 260px">
-                @await Html.PartialAsync("_Notification")
+                 @await Html.PartialAsync("_Notification")
                 @RenderBody()
             </div>
         </div>
@@ -72,6 +85,9 @@
         }
         document.getElementById("logoutButton").addEventListener("click", clearSession);
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        
+    </script>
+
 </body>
 </html>
