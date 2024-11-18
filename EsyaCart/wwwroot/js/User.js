@@ -30,4 +30,5 @@ document.addEventListener('DOMContentLoaded', function () {
             BuyNowBtns[index].style.display = 'none'; 
         });
     });
+        
 });

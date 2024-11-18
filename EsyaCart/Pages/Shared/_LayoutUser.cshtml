@@ -8,41 +8,68 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/user.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/NavBar.css" asp-append-version="true"/>
+
 </head>
-<body class="" style="background-color: #E3F2FD;">
-    <header>
+<body class="body-main" style="background-color: #E3F2FD;">
+    <header style="background-color:#343A40 !important;" class="header">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container row">
-                
-                <div class="col-2">
-                    <a class="navbar-brand" asp-area="" asp-page="/User/Dashboard"><img src="~/Images/User/Logo.jpeg" alt="" srcset="" width="100px" height="60px" class="rounded rounded-2"> </a>
+            <div class=" row w-100 d-flex justify-content-start align-items-center" >
+                <div class="col-1 mx-5">
+                    <a class="navbar-brand" asp-area="" asp-page="/User/Dashboard"><img src="~/Images/Admin/logo4.png" alt="" srcset="" width="110px" height="70px" class="rounded rounded-2 mx-3"> </a>
                 </div>
-                <div class="col-7">
-                    <div class="row" style="background-color:#EDF2FB;">
+                <div class="col-6">
+                    <div class="row" style="background-color:#E9ECEF; border-radius:20px">
                         <div class=" col-1 p-2 text-center">
                             <i class="fa-solid fa-magnifying-glass fs-3"></i>
                         </div>
-                        <div class="containerinput col">                        
-                            <input type="text" class="w-100 col p-1 inputchange border-0 p-2" style="background-color:#F0F5FF;">
-                        </div>
+                        <form class="containerinput col" method="get" action="/User/ShowProducts">                        
+                             <input type="text" name="queryString" class="w-100 col p-1 inputchange border-0 p-2" style="background-color:#E9ECEF;color:#495057">
+                        </form>
                     </div>
                 </div>
-                <div class="col-1 text-center">
+                <div class="nav__link col-4 d-flex justify-content-between align-items-baseline">
+                    <a asp-page="../User/UserProfile/UsersProfile" class="mx-3 mt-3" >
+                        Profile
+                    </a>
+                    <div>
+                        @if (Model.logoutchecksession != null)
+                        {
+                            <a asp-page="../User/UserLogout" class=" fs-5">
+                                Logout
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-page="../User/UserLogin" class=" fs-5">
+                                Login
+                            </a>
+                        }
+                    </div>
+                    <a asp-page="../User/UserCart" class="mx-3 mt-3">
+                        Cart
+                    </a>
+                    <a asp-page="../Vendor/VendorLogin" class="mx-3 mt-3 ">
+                        Become a Seller
+                    </a>
+                </div>
+               @*  <div class="col-1 text-center">
                     <div class="d-flex">
-                        <div>
-                            <a asp-page="../User/UserProfile/UsersProfile" class="mx-3 text-decoration-none text-dark">
-                            <i class="fa-regular fa-user border rounded-circle p-2 border-dark logintext"></i>
+                        <div class="d-flex justify-content-center align-content-center">
+                            <a asp-page="../User/UserProfile/UsersProfile" class="mx-3 text-decoration-none text-dark mt-3" sty>
+                            
+                             <p class="nav-word">Profile</p>
                             </a>
                         </div>
                         <div class="logintext">
                             
                             @if(Model.logoutchecksession!=null){
                                 <a asp-page="../User/UserLogout" class="d-flex text-decoration-none text-dark fs-5">
-                                <p class="">Logout</p>
+                                <p class="nav-word">Logout</p>
                                 </a>
                             }else{
                                 <a asp-page="../User/UserLogin" class="d-flex text-decoration-none text-dark fs-5">
-                                <p class="">Login</p>
+                                <p class="nav-word">Login</p>
                                 </a>
                             }
                             
@@ -51,33 +78,26 @@
                 </div>
                 <div class="col-1 text-center ms-5 carttext">
                     <a asp-page="../User/UserCart" class="d-flex align-items-center text-decoration-none text-dark">
-                        <div class="me-3">
-                            <i class="fa-solid fa-cart-shopping fs-4"></i>
-                        </div>
                         <div class="fs-5">
-                            <p>Cart</p>
+                            <p class="nav-word">Cart</p>
                         </div>
                     </a>
                 </div>
                 <div class="col-2 text-center sellertext ">
                     <a asp-page="../Vendor/VendorLogin" class="d-flex align-items-center text-decoration-none text-dark">
-                        <div class="me-3 ">
-                            <i class="fa-solid fa-shop fs-4"></i>
-                        </div>
                         <div class="fs-5">
-                            <p>Become a Seller</p>
+                            <p class="nav-word">Become a Seller</p>
                         </div>
                     </a>
-                </div>
+                </div> *@
             </div>
         </nav>
     </header>
-    <div class="">
+    <div class="main">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
     <script src="https://kit.fontawesome.com/6978f47505.js" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
