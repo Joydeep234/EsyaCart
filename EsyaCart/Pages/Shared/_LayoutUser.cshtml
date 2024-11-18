@@ -9,12 +9,10 @@
     <link rel="stylesheet" href="~/css/user.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsyaCart.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/NavBar.css" asp-append-version="true"/>
-    
-        
-  
+
 </head>
-<body class="" style="background-color: #E3F2FD;">
-    <header style="background-color:#343A40 !important;">
+<body class="body-main" style="background-color: #E3F2FD;">
+    <header style="background-color:#343A40 !important;" class="header">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class=" row w-100 d-flex justify-content-start align-items-center" >
                 <div class="col-1 mx-5">
@@ -25,9 +23,9 @@
                         <div class=" col-1 p-2 text-center">
                             <i class="fa-solid fa-magnifying-glass fs-3"></i>
                         </div>
-                        <div class="containerinput col">                        
-                            <input type="text" class="w-100 col p-1 inputchange border-0 p-2" style="background-color:#E9ECEF;">
-                        </div>
+                        <form class="containerinput col" method="get" action="/User/ShowProducts">                        
+                             <input type="text" name="queryString" class="w-100 col p-1 inputchange border-0 p-2" style="background-color:#E9ECEF;color:#495057">
+                        </form>
                     </div>
                 </div>
                 <div class="nav__link col-4 d-flex justify-content-between align-items-baseline">
@@ -95,12 +93,11 @@
             </div>
         </nav>
     </header>
-    <div class="">
+    <div class="main">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
     <script src="https://kit.fontawesome.com/6978f47505.js" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

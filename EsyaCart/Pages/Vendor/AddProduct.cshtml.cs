@@ -47,6 +47,8 @@ namespace EsyaCart.Pages.Vendor
             }
             else
             {
+                TempData["ToastMessage"] = "Please Login!";
+                TempData["ToastType"] = "warning";
                 return RedirectToPage("/Vendor/VendorLogin");
             }
         }
@@ -92,12 +94,18 @@ namespace EsyaCart.Pages.Vendor
                 await _context.Products.AddAsync(product);
                 await _context.SaveChangesAsync();
 
-                Console.WriteLine("product added successfully");
+                TempData["ToastMessage"] = "New Product Added";
+                TempData["ToastType"] = "success";
 
                 return RedirectToPage("/Vendor/ViewProducts");
                 
             }
-            return Page();
+            else
+            {
+                TempData["ToastMessage"] = "Please, Fill all the feilds";
+                TempData["ToastType"] = "warning";
+                return RedirectToPage();
+            }
         }
     }
 }

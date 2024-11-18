@@ -1,0 +1,48 @@
+﻿@page
+@model EsyaCart.Pages.Vendor.ViewAnalytics
+@{
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Today's Orders Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Today's Orders</h5>
+                    <p class="display-4" id="todaysOrders">@Model.TodaysOrders</p> <!-- Replace 0 with dynamic value -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Last 7 Days Orders Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Totoal Orders</h5>
+                    <p class="display-4" id="last7DaysOrders">@Model.TotalOrders</p> <!-- Replace 0 with dynamic value -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's Revenue Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Today's Revenue</h5>
+                    <p class="display-4" id="todaysRevenue">@Model.TodaysRevenue</p> <!-- Replace $0 with dynamic value -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Revenue Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Total Revenue</h5>
+                    <p class="display-4" id="totalRevenue">@Model.TotalRevenue</p> <!-- Replace $0 with dynamic value -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

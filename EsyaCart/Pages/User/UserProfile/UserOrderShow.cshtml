@@ -13,12 +13,11 @@
                     
             <div class="row settingborder mt-5">
                 <a asp-page="../../User/Productanddetails" asp-route-productID = "@ord.Product_id" class="col d-flex align-items-center justify-content-center setimginorder">
-                    <img src="~/Images/User/Logo.jpeg" alt="Product Image" class="orderimg">
+                    <img src="~/Uploads/@ord.prodimgUrl" alt="Product Image" class="orderimg">
                 </a>
                 <div class="col">
                     <div class=" d-flex flex-column">
                         <a asp-page="../../User/Productanddetails" asp-route-productID = "@ord.Product_id" class="fs-4 text-decoration-none text-dark">@ord.ProdName</a>
-                        <p>@ord.Product_id</p>
                         <div class="">
                             <span class="fs-6">Order Date : </span><span class="fs-6 text-success">@ord.orderdate</span>
                         </div>
@@ -57,14 +56,14 @@
             </div>
             <div class="modal-body d-flex">
                 <div class="d-flex align-items-center justify-content-center setimginorder">
-                    <img src="~/Images/User/Logo.jpeg" alt="Product Image" class="orderimg">
+                    <img src="~/Uploads/@ord.prodimgUrl" alt="Product Image" class="orderimg2">
                 </div>
                 <div class="">
                     <form method="post" asp-page-handler="EditReviews" asp-route-prodid="@ord.Product_id">
                         <textarea asp-for="@Model.reviewmodel.Description" class="form-control ms-3" style="resize: none;" cols="30" rows="3" placeholder="Write Review..."></textarea>
                         <input type="number" asp-for="@Model.reviewmodel.Ratings" step="0.1" class="form-control ms-3 mt-2" placeholder="Rating.. 0-5" min="0" max="5" required>
                         <span asp-validation-for="@Model.reviewmodel.Ratings"></span>
-                        <p>@ord.Product_id</p>
+                       
                         
                         <button type="submit" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Submit Review</button>
                         

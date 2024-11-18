@@ -1,0 +1,43 @@
+﻿@page
+@model EsyaCart.Pages.Vendor.ViewOrders
+@{
+}
+
+@{
+	Console.WriteLine("This page is called");
+}
+
+		@{
+			if(Model.sellerOrders.Count != 0)
+			{
+				<table class="table">
+					<thead>
+					<th>Product Name</th>
+					<th>No.of Items Sold</th>
+					</thead>
+					<tbody>
+						@{foreach (var orderList in Model.sellerOrders)
+							{
+								<tr>
+									<td>@orderList.ProductName</td>
+									@{
+										if(@orderList.OrdersCount == 0){
+										<td>No orders placed yet</td>
+									}
+									else{
+										<td>@orderList.OrdersCount</td>
+									}
+									}
+									
+								</tr>
+							}
+						}
+					</tbody>
+				</table>
+			}
+			else
+			{
+				<h1>No Oreders Placed for your porducts</h1>
+			}
+			
+		}
