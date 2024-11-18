@@ -3,6 +3,7 @@ using EsyaCart.Data.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace EsyaCart.Pages.Admin
 {
@@ -14,6 +15,12 @@ namespace EsyaCart.Pages.Admin
         {
             _context = context;
         }
+
+        [BindProperty(SupportsGet = true)]
+        public int order_int { get; set; }
+        public List<Orders> orders { get; set; } = new List<Orders>();
+
+        public List<OrderItems> items { get; set; } = new List<OrderItems>();
 
         public List<AllOrderDetails> AllOrders { get; set; }
 
@@ -28,10 +35,16 @@ namespace EsyaCart.Pages.Admin
                 return RedirectToPage("/Admin/AdminLogin");
             }
 
+            //----------------------Session END-----------------------------------//
 
 
+            orders = await _context.Orders.ToListAsync();
+            //-------------------------Orders End-----------------------------------//
+             
+            items = await _context.OrderItems.ToListAsync();
+            
 
-            AllOrders = await (from Orders in _context.Orders
+            /*AllOrders = await (from Orders in _context.Orders
                                join OrderItems in _context.OrderItems
                               on Orders.Order_id equals OrderItems.Order_Id
                                select new AllOrderDetails
@@ -44,10 +57,12 @@ namespace EsyaCart.Pages.Admin
                                    Price = OrderItems.Price,
                                    TotalPrice = Orders.TotalPrice,
                                    isDelivered = Orders.isDelivered
-                               }).ToListAsync();
+                               }).ToListAsync();*/
 
             return Page();
         }
+
+        
 
 
     }

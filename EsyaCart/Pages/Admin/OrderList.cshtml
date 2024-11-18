@@ -6,36 +6,76 @@
 <div class="col-12">
     <table class="table table-striped">
         <thead>
-        <th>Order Id</th>
-        <th>Customer's Id</th>
-        <th>Product Id</th>
-        <th>Date</th>
-        <th>Price</th>
-        <th>Total Price</th>
-        <th>Quantity</th>
-        <th>Order Status</th>
+            <th>Order ID</th>
+            <th>OrderDate</th>
+            <th>Total Price</th>
+            <th>Customer_Id</th>
+            <th>IsDelivered</th>
         </thead>
         <tbody>
-
-            @{
-                if (Model.AllOrders.Count != 0)
+            @if (Model.orders.Count != 0)
+            {
+                foreach (var userlist in Model.orders)
                 {
-                    foreach (var userlist in Model.AllOrders)
-                    {
-
-                        <tr>
-                            <td>@userlist.OrderItems_Id</td>
-                            <td>@userlist.Customer_Id</td>
-                            <td>@userlist.Product_Id</td>
-                            <td>@userlist.OrderedDate</td>
-                            <td>@userlist.Price</td>
-                            <td>@userlist.TotalPrice</td>
-                            <td>@userlist.Quantity</td>
-                            <td>@userlist.isDelivered</td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>@userlist.Order_id</td>
+                        <td>@userlist.OrderedDate</td>
+                        <td>@userlist.TotalPrice</td>
+                        <td>@userlist.Customer_Id</td>
+                        <td>@userlist.isDelivered</td>
+                        <td>
+                            <!-- Form to pass Order_id as a parameter -->
+                            <a class="btn btn-success" asp-route-Order_id="@userlist.Order_id" asp-page="../Admin/OrderItemList">ViewItems</a>
+                        </td>
+                    </tr>
                 }
             }
         </tbody>
     </table>
 </div>
+
+<!-- Modal -->
+@* <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Order Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>OrderItems_Id</th>
+                            <th>Order_Id</th>
+                            <th>Product_Id</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total Price</th>
+                        </thead>
+                        <tbody>
+                            @if (Model.items.Count != 0)
+                            {
+                                foreach (var orderlist in Model.items)
+                                {
+                                    if (orderlist.Order_Id == Model.order_int)
+                                    {
+                                        <tr>
+                                            <td>@orderlist.OrderItems_Id</td>
+                                            <td>@orderlist.Order_Id</td>
+                                            <td>@orderlist.Product_Id</td>
+                                            <td>@orderlist.Quantity</td>
+                                            <td>@orderlist.Price</td>
+                                            <td>@orderlist.TotalPrice</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ *@

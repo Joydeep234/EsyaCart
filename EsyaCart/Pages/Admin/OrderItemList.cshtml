@@ -1,0 +1,38 @@
+﻿@page
+@model EsyaCart.Pages.Admin.OrderItemListModel
+@{
+}
+
+<div class="modal-body">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+            <th>OrderItems_Id</th>
+            <th>Order_Id</th>
+            <th>Product_Id</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+            </thead>
+            <tbody>
+                @if (Model.items.Count != 0)
+                {
+                    foreach (var orderlist in Model.items)
+                    {
+                        if (orderlist.Order_Id == Model.Order_Id)
+                        {
+                            <tr>
+                                <td>@orderlist.OrderItems_Id</td>
+                                <td>@orderlist.Order_Id</td>
+                                <td>@orderlist.Product_Id</td>
+                                <td>@orderlist.Quantity</td>
+                                <td>@orderlist.Price</td>
+                                <td>@orderlist.TotalPrice</td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
